@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Place your class / interface description here.
@@ -25,9 +25,9 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 11 Apr 2014
  */
-@XmlType(name="MappingData")
+@XmlRootElement(name="MappingData")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MappingData<SOURCE extends Serializable, TARGET extends Serializable> implements Serializable {
+public class MappingData<SOURCE, TARGET> implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5556836524367681531L;
 	

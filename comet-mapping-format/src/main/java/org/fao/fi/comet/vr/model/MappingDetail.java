@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="MappingDetail")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MappingDetail<TARGET extends Serializable> implements Serializable {
+public class MappingDetail<TARGET> implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = -1479077411818857917L;
 
@@ -34,7 +34,7 @@ public class MappingDetail<TARGET extends Serializable> implements Serializable 
 	private double _score;
 	
 	@XmlElement(name="TargetElement")
-	private TARGET _targetElement;
+	private Element<TARGET> _targetElement;
 
 	/**
 	 * Class constructor
@@ -50,7 +50,7 @@ public class MappingDetail<TARGET extends Serializable> implements Serializable 
 	 * @param score
 	 * @param targetElement
 	 */
-	public MappingDetail(double score, TARGET targetElement) {
+	public MappingDetail(double score, Element<TARGET> targetElement) {
 		super();
 		this._score = score;
 		this._targetElement = targetElement;
@@ -73,14 +73,14 @@ public class MappingDetail<TARGET extends Serializable> implements Serializable 
 	/**
 	 * @return the 'targetElement' value
 	 */
-	public final TARGET getTargetElement() {
+	public final Element<TARGET> getTargetElement() {
 		return this._targetElement;
 	}
 
 	/**
 	 * @param targetElement the 'targetElement' value to set
 	 */
-	public final void setTargetElement(TARGET targetElement) {
+	public final void setTargetElement(Element<TARGET> targetElement) {
 		this._targetElement = targetElement;
 	}
 
@@ -94,14 +94,16 @@ public class MappingDetail<TARGET extends Serializable> implements Serializable 
 		long temp;
 		temp = Double.doubleToLongBits(this._score);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((this._targetElement == null) ? 0 : this._targetElement.hashCode());
+		result = prime
+				* result
+				+ ((this._targetElement == null) ? 0 : this._targetElement
+						.hashCode());
 		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,8 +112,10 @@ public class MappingDetail<TARGET extends Serializable> implements Serializable 
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("rawtypes")
 		MappingDetail other = (MappingDetail) obj;
-		if (Double.doubleToLongBits(this._score) != Double.doubleToLongBits(other._score))
+		if (Double.doubleToLongBits(this._score) != Double
+				.doubleToLongBits(other._score))
 			return false;
 		if (this._targetElement == null) {
 			if (other._targetElement != null)

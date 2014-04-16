@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="Mapping")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Mapping<SOURCE extends Serializable, TARGET extends Serializable> implements Serializable {
+public class Mapping<SOURCE, TARGET> implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 6031559793227240424L;
 	
@@ -93,15 +93,16 @@ public class Mapping<SOURCE extends Serializable, TARGET extends Serializable> i
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((this._source == null) ? 0 : this._source.hashCode());
-		result = prime * result + ((this._targets == null) ? 0 : this._targets.hashCode());
+		result = prime * result
+				+ ((this._source == null) ? 0 : this._source.hashCode());
+		result = prime * result
+				+ ((this._targets == null) ? 0 : this._targets.hashCode());
 		return result;
 	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,6 +111,7 @@ public class Mapping<SOURCE extends Serializable, TARGET extends Serializable> i
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("rawtypes")
 		Mapping other = (Mapping) obj;
 		if (this._source == null) {
 			if (other._source != null)

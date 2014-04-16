@@ -5,6 +5,8 @@ package org.fao.fi.comet.vr.model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -23,7 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @SuppressWarnings("serial")
 @XmlType(name="Element")
-public class Element<TYPE extends Serializable> implements Serializable {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Element<TYPE> implements Serializable {
 	@XmlElement(name="ElementIdentifier")
 	private ElementIdentifier _id;
 	
