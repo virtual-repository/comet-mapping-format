@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import static org.fao.fi.comet.vr.model.ElementIdentifier.*;
 /**
  * Place your class / interface description here.
  *
@@ -23,10 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 11 Apr 2014
  */
-@SuppressWarnings("serial")
 @XmlType(name="Element")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Element<TYPE> implements Serializable {
+	private static final long serialVersionUID = 2149883627044381192L;
+
 	@XmlElement(name="ElementIdentifier")
 	private ElementIdentifier _id;
 	
@@ -39,6 +41,32 @@ public class Element<TYPE> implements Serializable {
 	 */
 	public Element() {
 		super();
+	}
+	
+	/**
+	 * @param id
+	 */
+	public Element(ElementIdentifier id) {
+		super();
+		this._id = id;
+	}
+
+	/**
+	 * @param data
+	 */
+	public Element(TYPE data) {
+		super();
+		this._data = data;
+	}
+
+	/**
+	 * @param id
+	 * @param data
+	 */
+	public Element(ElementIdentifier id, TYPE data) {
+		super();
+		this._id = id;
+		this._data = data;
 	}
 
 	/**
@@ -68,7 +96,35 @@ public class Element<TYPE> implements Serializable {
 	public final void setData(TYPE data) {
 		this._data = data;
 	}
+	
+	public Element<TYPE> with(String providerId, String elementId) {
+		return this.with(identifier(providerId, elementId));
+	}
+	
+	 public Element<TYPE> with(ElementIdentifier elementIdentifier) {
+		this.setId(elementIdentifier);
+		
+		return this;
+	}
+	
+	public Element<TYPE> wrapping(TYPE data) {
+		this._data = data;
+		
+		return this;
+	}
 
+	final static public <T> Element<T> wrap(String providerId, String elementId, T data) {
+		return new Element<T>().with(providerId, elementId).wrapping(data);
+	}
+
+	final static public <T> Element<T> wrap(ElementIdentifier elementIdentifier, T data) {
+		return new Element<T>().with(elementIdentifier).wrapping(data);
+	}
+	
+	final static public <T> Element<T> wrap(T data) {
+		return new Element<T>().wrapping(data);
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

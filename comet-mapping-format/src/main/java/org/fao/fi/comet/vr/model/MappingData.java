@@ -31,7 +31,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5556836524367681531L;
 	
-	@XmlElementWrapper(name="Mappings")
+//	@XmlElementWrapper(name="Mappings")
 	@XmlElement(name="Mapping")
 	private Collection<Mapping<SOURCE, TARGET>> _mappings;
 

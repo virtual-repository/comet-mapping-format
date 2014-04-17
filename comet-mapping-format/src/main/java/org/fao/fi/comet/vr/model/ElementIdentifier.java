@@ -3,6 +3,8 @@
  */
 package org.fao.fi.comet.vr.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -23,7 +25,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="ElementIdentifier")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ElementIdentifier {
+public class ElementIdentifier implements Serializable {
+	private static final long serialVersionUID = 3461143166759375588L;
+
 	@XmlAttribute(name="providerId")
 	private String _providerId;
 	
@@ -48,6 +52,14 @@ public class ElementIdentifier {
 		super();
 		this._providerId = providerId;
 		this._elementId = elementId;
+	}
+	
+	final static public ElementIdentifier identifier(String providerId, String elementId) {
+		return new ElementIdentifier(providerId, elementId);
+	}
+	
+	final static public ElementIdentifier identifier(ElementIdentifier elementIdentifier) {
+		return new ElementIdentifier(elementIdentifier._providerId, elementIdentifier._providerId);
 	}
 
 	/**
