@@ -223,7 +223,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		return this;
 	}
 	
-	//Move the following two methods elsewhere?
+	//Move the following four methods elsewhere?
 	public Collection<MappingDetail<TARGET>> mappingsFor(Element<SOURCE> source) {
 		Collection<MappingDetail<TARGET>> found = new ArrayList<MappingDetail<TARGET>>();
 		
@@ -238,11 +238,24 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		return found;
 	}
 	
-	public boolean areMapped(Element<SOURCE> source, Element<TARGET> target) {
-		final ElementIdentifier toFind = target.getId();
+	//Move the following two methods elsewhere?
+	public Collection<ElementIdentifier> mappingsFor(final ElementIdentifier sourceIdentifier) {
+		Collection<ElementIdentifier> found = new ArrayList<ElementIdentifier>();
 		
-		for(MappingDetail<TARGET> in : this.mappingsFor(source)) {
-			if(toFind.equals(in.getTargetElement().getId()))
+		if(this._mappings != null) {
+			for(Mapping<SOURCE, TARGET> in : this._mappings)
+				if(sourceIdentifier.equals(in.getSource().getId())) {
+					for(MappingDetail<TARGET> of : in.getTargets())
+						found.add(of.getTargetElement().getId());
+				}
+		}
+		
+		return found;
+	}
+	
+	public boolean areMapped(ElementIdentifier source, final ElementIdentifier target) {
+		for(ElementIdentifier in : this.mappingsFor(source)) {
+			if(target.equals(in))
 				return true;
 		}
 		
