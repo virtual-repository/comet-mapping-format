@@ -43,7 +43,7 @@ public class TestSerialization {
 	public void serializeWithoutDependencies() throws Throwable {
 		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
-		JAXBContext ctx = JAXBContext.newInstance(MappingData.class);
+		JAXBContext ctx = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		
 		ctx.createMarshaller().marshal(data, baos);
@@ -72,7 +72,7 @@ public class TestSerialization {
 	public void roundtripWithoutDependencies() throws Throwable {
 		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
-		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class);
+		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		
 		ctxMarshall.createMarshaller().marshal(data, baos);

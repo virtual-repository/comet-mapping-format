@@ -8,8 +8,9 @@ import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Place your class / interface description here.
  *
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 11 Apr 2014
  */
-@XmlType(name="Element")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Element<TYPE> implements Serializable {
 	private static final long serialVersionUID = 2149883627044381192L;
@@ -31,7 +32,7 @@ public class Element<TYPE> implements Serializable {
 	@XmlElement(name="ElementIdentifier")
 	private ElementIdentifier _id;
 	
-	@XmlElement(name="Data")
+	@XmlAnyElement(lax=true)
 	private TYPE _data;
 
 	/**

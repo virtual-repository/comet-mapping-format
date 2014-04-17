@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @version 1.0
  * @since 16 Apr 2014
  */
-@XmlRootElement
+@XmlRootElement(name="GenericTerm")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GenericTerm implements Serializable {
 	/** Field serialVersionUID */
