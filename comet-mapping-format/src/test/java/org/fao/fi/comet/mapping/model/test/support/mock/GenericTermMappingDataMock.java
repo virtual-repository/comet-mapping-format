@@ -33,7 +33,6 @@ import org.fao.fi.comet.mapping.model.test.support.GenericTerm;
  * @version 1.0
  * @since 17/apr/2014
  */
-@SuppressWarnings("deprecation")
 public class GenericTermMappingDataMock extends MappingData<GenericTerm, GenericTerm> {
 	final static public long serialVersionUID = -666;
 	
