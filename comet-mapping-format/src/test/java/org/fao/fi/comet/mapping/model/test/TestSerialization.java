@@ -40,6 +40,18 @@ public class TestSerialization {
 	}
 	
 	@Test
+	public void serializeWildcard() throws Throwable {
+		MappingData<?, ?> data = GenericTermMappingDataMock.newInstance();
+		
+		JAXBContext ctx = JAXBContext.newInstance(MappingData.class);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
+		ctx.createMarshaller().marshal(data, baos);
+		
+		System.out.println(new String(baos.toByteArray(), "UTF-8"));
+	}
+	
+	@Test
 	public void roundtrip() throws Throwable {
 		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
