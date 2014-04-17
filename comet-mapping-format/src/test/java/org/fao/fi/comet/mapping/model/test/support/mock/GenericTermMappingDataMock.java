@@ -14,6 +14,7 @@ import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.configuredMat
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.optional;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationPropertyDSL.configurationProperty;
 
+import java.net.URI;
 import java.util.Date;
 
 import org.fao.fi.comet.mapping.model.DataProvider;
@@ -40,11 +41,12 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 		super();
 	}
 	
-	static final public MappingData<GenericTerm, GenericTerm> newInstance() {
-		DataProvider sourceDataProvider = new DataProvider("fooResourceStatus", GenericTerm.class.getName());
-		DataProvider targetDataProvider = new DataProvider("barResourceStatus", GenericTerm.class.getName());
+	static final public MappingData<GenericTerm, GenericTerm> newInstance() throws Throwable {
+		DataProvider sourceDataProvider = new DataProvider(new URI("urn:fooResourceStatus"), GenericTerm.class.getName());
+		DataProvider targetDataProvider = new DataProvider(new URI("urn:barResourceStatus"), GenericTerm.class.getName());
 		
 		MappingData<GenericTerm, GenericTerm> mappingData = new MappingData<GenericTerm, GenericTerm>().
+			id(new URI("urn:foo:bar")).
 			version("0.01").
 			producedBy("Foo Bazzi").
 			on(new Date()).
@@ -79,36 +81,36 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 			).
 			with(minimumWeightedScore(0.3), maximumCandidates(5)).
 			including(
-				map(wrap(GenericTerm.describing("over-exploited")).with(identifierFor(sourceDataProvider, "1")), GenericTerm.class).
+				map(wrap(GenericTerm.describing("over-exploited")).with(identifierFor(sourceDataProvider, new URI("urn:1"))), GenericTerm.class).
 					to(
-						target(wrap(GenericTerm.describing("overexploited")).with(identifierFor(targetDataProvider, "69"))).
+						target(wrap(GenericTerm.describing("overexploited")).with(identifierFor(targetDataProvider, new URI("urn:69")))).
 							asContributedBy(matcher("foo").scoring(0.39), 
 											matcher("bar").scoring(0.69),
 											matcher("baz").nonPerformed()
 							).withWeightedScore(0.59)
 					).andTo(
-						target(wrap(GenericTerm.describing("ov-erexploited")).with(identifierFor(targetDataProvider, "96"))).
+						target(wrap(GenericTerm.describing("ov-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:96")))).
 							asContributedBy(matcher("foo").scoring(0.79), 
 											matcher("bar").nonPerformed(),
 											matcher("baz").nonPerformed()
 							).withWeightedScore(0.59)
 					)
 			).including(
-				map(wrap(GenericTerm.describing("under-exploited")).with(identifierFor(sourceDataProvider, "2")), GenericTerm.class).
+				map(wrap(GenericTerm.describing("under-exploited")).with(identifierFor(sourceDataProvider, new URI("urn:2"))), GenericTerm.class).
 					to(
-						target(wrap(GenericTerm.describing("underexploited")).with(identifierFor(targetDataProvider, "70"))).
+						target(wrap(GenericTerm.describing("underexploited")).with(identifierFor(targetDataProvider, new URI("urn:70")))).
 							asContributedBy(matcher("foo").scoring(0.49), 
 											matcher("bar").scoring(0.59),
 											matcher("baz").nonPerformed()
 							).withWeightedScore(0.39)
 					).andTo(
-						target(wrap(GenericTerm.describing("und-erexploited")).with(identifierFor(targetDataProvider, "97"))).
+						target(wrap(GenericTerm.describing("und-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:97")))).
 							asContributedBy(matcher("foo").scoring(0.79), 
 											matcher("bar").nonPerformed(),
 											matcher("baz").nonPerformed()
 							).withWeightedScore(0.79)
 					).andTo(
-						target(wrap(GenericTerm.describing("un-derexploited")).with(identifierFor(targetDataProvider, "98"))).
+						target(wrap(GenericTerm.describing("un-derexploited")).with(identifierFor(targetDataProvider, new URI("urn:98")))).
 							asContributedBy(matcher("foo").scoring(0.29), 
 											matcher("bar").nonPerformed(),
 											matcher("baz").scoring(0.39)

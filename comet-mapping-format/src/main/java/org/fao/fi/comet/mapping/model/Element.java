@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -95,7 +96,7 @@ public class Element<TYPE> implements Serializable {
 		this._data = data;
 	}
 	
-	public Element<TYPE> with(String providerId, String elementId) {
+	public Element<TYPE> with(URI providerId, URI elementId) {
 		return this.with(new ElementIdentifier(providerId, elementId));
 	}
 	

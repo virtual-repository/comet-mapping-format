@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,9 +31,9 @@ public class DataProvider implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5860563937581245902L;
 
-	@XmlAttribute(name="providedType") private String _providedType;
-	@XmlAttribute(name="type") private String _type;
-	@XmlAttribute(name="identifier") private String _identifier;
+	@XmlAttribute(name="providedType", required=false) private String _providedType;
+	@XmlAttribute(name="type", required=false) private String _type;
+	@XmlAttribute(name="identifier") private URI _identifier;
 	
 	@XmlElement(name="Description")
 	private String _description;
@@ -51,7 +52,7 @@ public class DataProvider implements Serializable {
 	 * @param type
 	 * @param description
 	 */
-	public DataProvider(String identifier, String type, String providedType, String description) {
+	public DataProvider(URI identifier, String type, String providedType, String description) {
 		super();
 		this._identifier = identifier;
 		this._type = type;
@@ -65,21 +66,21 @@ public class DataProvider implements Serializable {
 	 * @param identifier
 	 * @param type
 	 */
-	public DataProvider(String identifier, String providedType) {
+	public DataProvider(URI identifier, String providedType) {
 		this(identifier, providedType + "Provider", providedType, null);
 	}
 
 	/**
 	 * @return the 'identifier' value
 	 */
-	public String getIdentifier() {
+	public URI getIdentifier() {
 		return this._identifier;
 	}
 
 	/**
 	 * @param identifier the 'identifier' value to set
 	 */
-	public void setIdentifier(String identifier) {
+	public void setIdentifier(URI identifier) {
 		this._identifier = identifier;
 	}
 

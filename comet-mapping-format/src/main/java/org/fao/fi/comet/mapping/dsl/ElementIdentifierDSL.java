@@ -3,6 +3,8 @@
  */
 package org.fao.fi.comet.mapping.dsl;
 
+import java.net.URI;
+
 import org.fao.fi.comet.mapping.model.DataProvider;
 import org.fao.fi.comet.mapping.model.ElementIdentifier;
 
@@ -24,11 +26,11 @@ public class ElementIdentifierDSL {
 		return new ElementIdentifier(elementIdentifier.getProviderId(), elementIdentifier.getElementId());
 	}
 
-	final static public ElementIdentifier identifier(String providerId, String elementId) {
+	final static public ElementIdentifier identifier(URI providerId, URI elementId) {
 		return new ElementIdentifier(providerId, elementId);
 	}
 	
-	final static public ElementIdentifier identifierFor(DataProvider provider, String elementId) {
+	final static public ElementIdentifier identifierFor(DataProvider provider, URI elementId) {
 		return new ElementIdentifier(provider.getIdentifier(), elementId);
 	}
 }

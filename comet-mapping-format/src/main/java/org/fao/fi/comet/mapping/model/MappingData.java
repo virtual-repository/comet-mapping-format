@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,6 +39,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	@XmlAttribute(name="on") private Date _producedOn;
 	@XmlAttribute(name="producedBy") private String _producedBy;
 	@XmlAttribute(name="version") private String _version;
+	@XmlAttribute(name="id") private URI _identifier;
 	
 	@XmlElement(name="Description")
 	private String _description;
@@ -58,7 +60,21 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	public MappingData() {
 		super();
 	}
-	
+
+	/**
+	 * @return the 'identifier' value
+	 */
+	public URI getIdentifier() {
+		return this._identifier;
+	}
+
+	/**
+	 * @param identifier the 'identifier' value to set
+	 */
+	public void setIdentifier(URI identifier) {
+		this._identifier = identifier;
+	}
+
 	/**
 	 * @return the 'version' value
 	 */
@@ -156,6 +172,12 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	public void setMappings(Collection<Mapping<SOURCE, TARGET>> mappings) {
 		this._mappings = mappings;
 	}
+	
+	public MappingData<SOURCE, TARGET> id(URI identifier) {
+		this._identifier = identifier;
+		
+		return this;
+	} 
 	
 	public MappingData<SOURCE, TARGET> version(String version) {
 		this._version = version;
@@ -270,6 +292,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((this._description == null) ? 0 : this._description.hashCode());
+		result = prime * result + ((this._identifier == null) ? 0 : this._identifier.hashCode());
 		result = prime * result + ((this._mappings == null) ? 0 : this._mappings.hashCode());
 		result = prime * result + ((this._matcherConfiguration == null) ? 0 : this._matcherConfiguration.hashCode());
 		result = prime * result + ((this._processConfiguration == null) ? 0 : this._processConfiguration.hashCode());
@@ -296,6 +319,11 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 			if (other._description != null)
 				return false;
 		} else if (!this._description.equals(other._description))
+			return false;
+		if (this._identifier == null) {
+			if (other._identifier != null)
+				return false;
+		} else if (!this._identifier.equals(other._identifier))
 			return false;
 		if (this._mappings == null) {
 			if (other._mappings != null)

@@ -28,7 +28,7 @@ import org.junit.Test;
  */
 public class TestSerialization {
 	@Test
-	public void serialize() throws Throwable {
+	public void serializeWithDependencies() throws Throwable {
 		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
 		JAXBContext ctx = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
@@ -40,8 +40,8 @@ public class TestSerialization {
 	}
 	
 	@Test
-	public void serializeWildcard() throws Throwable {
-		MappingData<?, ?> data = GenericTermMappingDataMock.newInstance();
+	public void serializeWithoutDependencies() throws Throwable {
+		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
 		JAXBContext ctx = JAXBContext.newInstance(MappingData.class);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -52,7 +52,24 @@ public class TestSerialization {
 	}
 	
 	@Test
-	public void roundtrip() throws Throwable {
+	public void roundtripWithDependencies() throws Throwable {
+		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
+		
+		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
+		ctxMarshall.createMarshaller().marshal(data, baos);
+		
+		String xml = new String(baos.toByteArray(), "UTF-8");
+		
+		System.out.println(xml);
+		
+		JAXBContext ctxUnmarshall = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
+		ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+	}
+	
+	@Test
+	public void roundtripWithoutDependencies() throws Throwable {
 		MappingData<GenericTerm, GenericTerm> data = GenericTermMappingDataMock.newInstance();
 		
 		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class);

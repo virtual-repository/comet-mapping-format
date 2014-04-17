@@ -3,6 +3,8 @@
  */
 package org.fao.fi.comet.mapping.dsl;
 
+import java.net.URI;
+
 import org.fao.fi.comet.mapping.model.Element;
 import org.fao.fi.comet.mapping.model.ElementIdentifier;
 
@@ -24,7 +26,7 @@ public class ElementDSL {
 		return new Element<T>().with(elementIdentifier).wrapping(data);
 	}
 
-	final static public <T> Element<T> wrap(String providerId, String elementId, T data) {
+	final static public <T> Element<T> wrap(URI providerId, URI elementId, T data) {
 		return new Element<T>().with(providerId, elementId).wrapping(data);
 	}
 

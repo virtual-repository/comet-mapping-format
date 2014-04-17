@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,8 +29,8 @@ import javax.xml.bind.annotation.XmlType;
 public class ElementIdentifier implements Serializable {
 	private static final long serialVersionUID = 3461143166759375588L;
 
-	@XmlAttribute(name="elementId") private String _elementId;
-	@XmlAttribute(name="providerId") private String _providerId;
+	@XmlAttribute(name="elementId") private URI _elementId;
+	@XmlAttribute(name="providerId") private URI _providerId;
 	
 	/**
 	 * Class constructor
@@ -45,7 +46,7 @@ public class ElementIdentifier implements Serializable {
 	 * @param providerId
 	 * @param elementId
 	 */
-	public ElementIdentifier(String providerId, String elementId) {
+	public ElementIdentifier(URI providerId, URI elementId) {
 		super();
 		this._providerId = providerId;
 		this._elementId = elementId;
@@ -54,28 +55,28 @@ public class ElementIdentifier implements Serializable {
 	/**
 	 * @return the 'providerId' value
 	 */
-	public final String getProviderId() {
+	public final URI getProviderId() {
 		return this._providerId;
 	}
 
 	/**
 	 * @param providerId the 'providerId' value to set
 	 */
-	public final void setProviderId(String providerId) {
+	public final void setProviderId(URI providerId) {
 		this._providerId = providerId;
 	}
 
 	/**
 	 * @return the 'elementId' value
 	 */
-	public final String getElementId() {
+	public final URI getElementId() {
 		return this._elementId;
 	}
 
 	/**
 	 * @param elementId the 'elementId' value to set
 	 */
-	public final void setElementId(String elementId) {
+	public final void setElementId(URI elementId) {
 		this._elementId = elementId;
 	}
 

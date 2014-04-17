@@ -3,6 +3,8 @@
  */
 package org.fao.fi.comet.mapping.dsl;
 
+import java.net.URI;
+
 import org.fao.fi.comet.mapping.model.DataProvider;
 
 /**
@@ -19,7 +21,11 @@ import org.fao.fi.comet.mapping.model.DataProvider;
  * @since 17 Apr 2014
  */
 public class DataProviderDSL {
-	final static public DataProvider provider(String identifier, String providedType) {
+	final static public DataProvider provider(URI identifier) {
+		return new DataProvider(identifier, null);
+	}
+	
+	final static public DataProvider provider(URI identifier, String providedType) {
 		return new DataProvider(identifier, providedType);
 	}
 }

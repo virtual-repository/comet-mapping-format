@@ -8,7 +8,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Place your class / interface description here.
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 16 Apr 2014
  */
-@XmlType(name="GenericTerm")
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GenericTerm implements Serializable {
 	/** Field serialVersionUID */
