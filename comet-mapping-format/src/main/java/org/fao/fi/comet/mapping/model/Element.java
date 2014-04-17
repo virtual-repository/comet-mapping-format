@@ -1,7 +1,7 @@
 /**
  * (c) 2014 FAO / UN (project: comet-core-vr-model)
  */
-package org.fao.fi.comet.vr.model;
+package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
 
@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import static org.fao.fi.comet.vr.model.ElementIdentifier.*;
 /**
  * Place your class / interface description here.
  *
@@ -98,7 +96,7 @@ public class Element<TYPE> implements Serializable {
 	}
 	
 	public Element<TYPE> with(String providerId, String elementId) {
-		return this.with(identifier(providerId, elementId));
+		return this.with(new ElementIdentifier(providerId, elementId));
 	}
 	
 	 public Element<TYPE> with(ElementIdentifier elementIdentifier) {
@@ -113,18 +111,6 @@ public class Element<TYPE> implements Serializable {
 		return this;
 	}
 
-	final static public <T> Element<T> wrap(String providerId, String elementId, T data) {
-		return new Element<T>().with(providerId, elementId).wrapping(data);
-	}
-
-	final static public <T> Element<T> wrap(ElementIdentifier elementIdentifier, T data) {
-		return new Element<T>().with(elementIdentifier).wrapping(data);
-	}
-	
-	final static public <T> Element<T> wrap(T data) {
-		return new Element<T>().wrapping(data);
-	}
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -140,7 +126,6 @@ public class Element<TYPE> implements Serializable {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -149,6 +134,7 @@ public class Element<TYPE> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("rawtypes")
 		Element other = (Element) obj;
 		if (this._data == null) {
 			if (other._data != null)

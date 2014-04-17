@@ -1,7 +1,7 @@
 /**
  * (c) 2014 FAO / UN (project: comet-core-vr-model)
  */
-package org.fao.fi.comet.vr.model;
+package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
 
@@ -28,11 +28,8 @@ import javax.xml.bind.annotation.XmlType;
 public class ElementIdentifier implements Serializable {
 	private static final long serialVersionUID = 3461143166759375588L;
 
-	@XmlAttribute(name="providerId")
-	private String _providerId;
-	
-	@XmlAttribute(name="elementId")
-	private String _elementId;
+	@XmlAttribute(name="providerId") private String _providerId;
+	@XmlAttribute(name="elementId") private String _elementId;
 
 	/**
 	 * Class constructor
@@ -54,14 +51,6 @@ public class ElementIdentifier implements Serializable {
 		this._elementId = elementId;
 	}
 	
-	final static public ElementIdentifier identifier(String providerId, String elementId) {
-		return new ElementIdentifier(providerId, elementId);
-	}
-	
-	final static public ElementIdentifier identifier(ElementIdentifier elementIdentifier) {
-		return new ElementIdentifier(elementIdentifier._providerId, elementIdentifier._providerId);
-	}
-
 	/**
 	 * @return the 'providerId' value
 	 */

@@ -1,7 +1,7 @@
 /**
  * (c) 2014 FAO / UN (project: virtual-semantic-repository)
  */
-package org.fao.fi.comet.vr.model.test.support;
+package org.fao.fi.comet.mapping.model.test.support;
 
 import java.io.Serializable;
 
