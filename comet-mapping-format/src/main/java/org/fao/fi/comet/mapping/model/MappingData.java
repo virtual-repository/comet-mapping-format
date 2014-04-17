@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,9 +35,9 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5556836524367681531L;
 	
-	@XmlAttribute(name="version") private String _version;
-	@XmlAttribute(name="producedBy") private String _producedBy;
 	@XmlAttribute(name="on") private Date _producedOn;
+	@XmlAttribute(name="producedBy") private String _producedBy;
+	@XmlAttribute(name="version") private String _version;
 	
 	@XmlElement(name="Description")
 	private String _description;
@@ -44,6 +45,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	@XmlElement(name="ProcessConfiguration")
 	private ProcessConfiguration _processConfiguration;
 	
+	@XmlElementWrapper(name="Matchers")
 	@XmlElement(name="MatcherConfiguration")
 	private Collection<MatcherConfiguration> _matcherConfiguration;
 	
@@ -219,6 +221,32 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		this._mappings.addAll(Arrays.asList(mappings));
 		
 		return this;
+	}
+	
+	//Move the following two methods elsewhere?
+	public Collection<MappingDetail<TARGET>> mappingsFor(Element<SOURCE> source) {
+		Collection<MappingDetail<TARGET>> found = new ArrayList<MappingDetail<TARGET>>();
+		
+		final ElementIdentifier toFind = source.getId();
+		
+		if(this._mappings != null) {
+			for(Mapping<SOURCE, TARGET> in : this._mappings)
+				if(toFind.equals(in.getSource().getId()))
+					found.addAll(in.getTargets());
+		}
+		
+		return found;
+	}
+	
+	public boolean areMapped(Element<SOURCE> source, Element<TARGET> target) {
+		final ElementIdentifier toFind = target.getId();
+		
+		for(MappingDetail<TARGET> in : this.mappingsFor(source)) {
+			if(toFind.equals(in.getTargetElement().getId()))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/* (non-Javadoc)

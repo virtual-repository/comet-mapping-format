@@ -30,7 +30,7 @@ public class Element<TYPE> implements Serializable {
 	@XmlElement(name="ElementIdentifier")
 	private ElementIdentifier _id;
 	
-	@XmlElement(name="ElementData")
+	@XmlElement(name="Data")
 	private TYPE _data;
 
 	/**

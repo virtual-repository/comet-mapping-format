@@ -10,7 +10,7 @@ import static org.fao.fi.comet.mapping.dsl.MappingDSL.map;
 import static org.fao.fi.comet.mapping.dsl.MappingDataDSL.maximumCandidates;
 import static org.fao.fi.comet.mapping.dsl.MappingDataDSL.minimumWeightedScore;
 import static org.fao.fi.comet.mapping.dsl.MappingDetailDSL.target;
-import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.matcherConfiguration;
+import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.configuredMatcher;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.optional;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationPropertyDSL.configurationProperty;
 
@@ -40,9 +40,9 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 		super();
 	}
 	
-	final static MappingData<GenericTerm, GenericTerm> newInstance() {
-		DataProvider sourceDataProvider = new DataProvider("fooResourceStatus", GenericTerm.class.getSimpleName());
-		DataProvider targetDataProvider = new DataProvider("fooResourceStatus", GenericTerm.class.getSimpleName());
+	static final public MappingData<GenericTerm, GenericTerm> newInstance() {
+		DataProvider sourceDataProvider = new DataProvider("fooResourceStatus", GenericTerm.class.getName());
+		DataProvider targetDataProvider = new DataProvider("barResourceStatus", GenericTerm.class.getName());
 		
 		MappingData<GenericTerm, GenericTerm> mappingData = new MappingData<GenericTerm, GenericTerm>().
 			version("0.01").
@@ -50,28 +50,28 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 			on(new Date()).
 			linking(sourceDataProvider).to(targetDataProvider).
 			through(
-				matcherConfiguration("foo").
-					ofType("LexicalMatcher").
+				configuredMatcher("foo").
+					ofType("org.fao.fi.comet.common.matchers.LexicalMatcher").
 					weighting(10).
 					withMinimumScore(0.1).
 					having(
 						configurationProperty("stripSymbols", Boolean.FALSE)
 					),
 				optional(
-					matcherConfiguration("bar").
-						ofType("AnotherLexicalMatcher").
+					configuredMatcher("bar").
+						ofType("org.fao.fi.comet.common.matchers.AnotherLexicalMatcher").
 						weighting(30).
-						withMinimumScore(0.1).
+						withMinimumScore(0.0).
 						having(
 							configurationProperty("useSoundex", Boolean.TRUE),
 							configurationProperty("stripSymbols", Boolean.TRUE)
 						)
 					),
 				optional(
-					matcherConfiguration("bar").
-						ofType("YetAnotherLexicalMatcher").
+					configuredMatcher("baz").
+						ofType("org.fao.fi.comet.common.matchers.YetAnotherLexicalMatcher").
 						weighting(20).
-						withMinimumScore(0.1).
+						withMinimumScore(0.2).
 						having(
 							configurationProperty("useSoundex", Boolean.TRUE)
 						)
@@ -89,7 +89,7 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 					).andTo(
 						target(wrap(GenericTerm.describing("ov-erexploited")).with(identifierFor(targetDataProvider, "96"))).
 							asContributedBy(matcher("foo").scoring(0.79), 
-											matcher("baz").nonPerformed(),
+											matcher("bar").nonPerformed(),
 											matcher("baz").nonPerformed()
 							).withWeightedScore(0.59)
 					)

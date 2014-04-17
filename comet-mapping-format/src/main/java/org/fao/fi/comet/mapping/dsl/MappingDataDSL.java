@@ -30,6 +30,6 @@ public class MappingDataDSL {
 		if(maximumCandidates <= 0)
 			throw new IllegalArgumentException("The mapping maximum number of candidates should be greater than zero");
 		
-		return maximumCandidates(maximumCandidates);
+		return maximumCandidates;
 	}
 }

@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ElementIdentifier implements Serializable {
 	private static final long serialVersionUID = 3461143166759375588L;
 
-	@XmlAttribute(name="providerId") private String _providerId;
 	@XmlAttribute(name="elementId") private String _elementId;
-
+	@XmlAttribute(name="providerId") private String _providerId;
+	
 	/**
 	 * Class constructor
 	 *

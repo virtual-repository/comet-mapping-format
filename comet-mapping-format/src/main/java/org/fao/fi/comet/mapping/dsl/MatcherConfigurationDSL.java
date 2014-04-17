@@ -25,7 +25,7 @@ public class MatcherConfigurationDSL {
 		
 		return configuration;
 	}
-	final static public MatcherConfiguration matcherConfiguration(String id) {
+	final static public MatcherConfiguration configuredMatcher(String id) {
 		return new MatcherConfiguration(id);
 	}
 	

@@ -31,9 +31,9 @@ public class MappingContribution implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 8748101803408206932L;
 
-	@XmlAttribute(name="matcherId") private String _matcherId;
-	@XmlAttribute(name="matcherScore") private double _matcherScore;
 	@XmlAttribute(name="matcherScoreType") private MappingScoreType _matcherScoreType;
+	@XmlAttribute(name="matcherScore") private double _matcherScore;
+	@XmlAttribute(name="matcherId") private String _matcherId;
 	
 	/**
 	 * Class constructor

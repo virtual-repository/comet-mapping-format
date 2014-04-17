@@ -34,12 +34,12 @@ import org.fao.fi.comet.mapping.ScoreValue;
 public class MatcherConfiguration implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = -5759769021546429122L;
-	
-	@XmlAttribute(name="id") private String _matcherId;
-	@XmlAttribute(name="type") private String _matcherType;
-	@XmlAttribute(name="weight") private double _weight;
-	@XmlAttribute(name="minimumScore") private double _minimumScore;
+
 	@XmlAttribute(name="isOptional") private boolean _isOptional;
+	@XmlAttribute(name="minimumScore") private double _minimumScore;
+	@XmlAttribute(name="weight") private double _weight;
+	@XmlAttribute(name="type") private String _matcherType;
+	@XmlAttribute(name="id") private String _matcherId;
 	
 	@XmlElement(name="ConfigurationProperty")
 	private Collection<MatcherConfigurationProperty> _configurationProperties;
@@ -55,7 +55,7 @@ public class MatcherConfiguration implements Serializable {
 	 * Class constructor
 	 */
 	public MatcherConfiguration(String id) {
-		this(id, null, 1D, ScoreValue.NO_MATCH, true, new ArrayList<MatcherConfigurationProperty>());
+		this(id, null, 1D, ScoreValue.NO_MATCH, false, new ArrayList<MatcherConfigurationProperty>());
 	}
 
 	/**

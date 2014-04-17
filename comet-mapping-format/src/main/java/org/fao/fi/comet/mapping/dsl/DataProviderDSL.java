@@ -19,7 +19,7 @@ import org.fao.fi.comet.mapping.model.DataProvider;
  * @since 17 Apr 2014
  */
 public class DataProviderDSL {
-	final static public DataProvider provider(String identifier, String type) {
-		return new DataProvider(identifier, type, null);
+	final static public DataProvider provider(String identifier, String providedType) {
+		return new DataProvider(identifier, providedType);
 	}
 }

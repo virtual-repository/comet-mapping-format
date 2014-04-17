@@ -30,11 +30,9 @@ public class DataProvider implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5860563937581245902L;
 
-	@XmlAttribute(name="identifier")
-	private String _identifier;
-	
-	@XmlAttribute(name="type")
-	private String _type;
+	@XmlAttribute(name="providedType") private String _providedType;
+	@XmlAttribute(name="type") private String _type;
+	@XmlAttribute(name="identifier") private String _identifier;
 	
 	@XmlElement(name="Description")
 	private String _description;
@@ -53,10 +51,11 @@ public class DataProvider implements Serializable {
 	 * @param type
 	 * @param description
 	 */
-	public DataProvider(String identifier, String type, String description) {
+	public DataProvider(String identifier, String type, String providedType, String description) {
 		super();
 		this._identifier = identifier;
 		this._type = type;
+		this._providedType = providedType;
 		this._description = description;
 	}
 	
@@ -66,8 +65,8 @@ public class DataProvider implements Serializable {
 	 * @param identifier
 	 * @param type
 	 */
-	public DataProvider(String identifier, String type) {
-		this(identifier, type, null);
+	public DataProvider(String identifier, String providedType) {
+		this(identifier, providedType + "Provider", providedType, null);
 	}
 
 	/**
@@ -99,6 +98,20 @@ public class DataProvider implements Serializable {
 	}
 
 	/**
+	 * @return the 'providedType' value
+	 */
+	public String getProvidedType() {
+		return this._providedType;
+	}
+
+	/**
+	 * @param providedType the 'providedType' value to set
+	 */
+	public void setProvidedType(String providedType) {
+		this._providedType = providedType;
+	}
+
+	/**
 	 * @return the 'description' value
 	 */
 	public String getDescription() {
@@ -112,9 +125,7 @@ public class DataProvider implements Serializable {
 		this._description = description;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -123,13 +134,12 @@ public class DataProvider implements Serializable {
 		int result = 1;
 		result = prime * result + ((this._description == null) ? 0 : this._description.hashCode());
 		result = prime * result + ((this._identifier == null) ? 0 : this._identifier.hashCode());
+		result = prime * result + ((this._providedType == null) ? 0 : this._providedType.hashCode());
 		result = prime * result + ((this._type == null) ? 0 : this._type.hashCode());
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -150,6 +160,11 @@ public class DataProvider implements Serializable {
 			if (other._identifier != null)
 				return false;
 		} else if (!this._identifier.equals(other._identifier))
+			return false;
+		if (this._providedType == null) {
+			if (other._providedType != null)
+				return false;
+		} else if (!this._providedType.equals(other._providedType))
 			return false;
 		if (this._type == null) {
 			if (other._type != null)

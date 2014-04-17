@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * Place your class / interface description here.
@@ -37,7 +36,7 @@ public class MatcherConfigurationProperty  implements Serializable {
 	@XmlElement(name="Description")
 	private String _description;
 	
-	@XmlValue
+	@XmlElement(name="Value")
 	private Object _value;
 
 	/**
