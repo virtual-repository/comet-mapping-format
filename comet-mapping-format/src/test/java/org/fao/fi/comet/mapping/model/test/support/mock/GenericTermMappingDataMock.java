@@ -52,7 +52,7 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 			on(new Date()).
 			linking(sourceDataProvider).to(targetDataProvider).
 			through(
-				configuredMatcher("foo").
+				configuredMatcher(new URI("urn:matcher:foo")).
 					ofType("org.fao.fi.comet.common.matchers.LexicalMatcher").
 					weighting(10).
 					withMinimumScore(0.1).
@@ -60,7 +60,7 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 						configurationProperty("stripSymbols", Boolean.FALSE)
 					),
 				optional(
-					configuredMatcher("bar").
+					configuredMatcher(new URI("urn:matcher:bar")).
 						ofType("org.fao.fi.comet.common.matchers.AnotherLexicalMatcher").
 						weighting(30).
 						withMinimumScore(0.0).
@@ -70,7 +70,7 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 						)
 					),
 				optional(
-					configuredMatcher("baz").
+					configuredMatcher(new URI("urn:matcher:baz")).
 						ofType("org.fao.fi.comet.common.matchers.YetAnotherLexicalMatcher").
 						weighting(20).
 						withMinimumScore(0.2).
@@ -84,36 +84,36 @@ public class GenericTermMappingDataMock extends MappingData<GenericTerm, Generic
 				map(wrap(GenericTerm.describing("over-exploited")).with(identifierFor(sourceDataProvider, new URI("urn:1"))), GenericTerm.class).
 					to(
 						target(wrap(GenericTerm.describing("overexploited")).with(identifierFor(targetDataProvider, new URI("urn:69")))).
-							asContributedBy(matcher("foo").scoring(0.39), 
-											matcher("bar").scoring(0.69),
-											matcher("baz").nonPerformed()
+							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.39), 
+											matcher(new URI("urn:matcher:bar")).scoring(0.69),
+											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.59)
 					).andTo(
 						target(wrap(GenericTerm.describing("ov-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:96")))).
-							asContributedBy(matcher("foo").scoring(0.79), 
-											matcher("bar").nonPerformed(),
-											matcher("baz").nonPerformed()
+							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.79), 
+											matcher(new URI("urn:matcher:bar")).nonPerformed(),
+											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.59)
 					)
 			).including(
 				map(wrap(GenericTerm.describing("under-exploited")).with(identifierFor(sourceDataProvider, new URI("urn:2"))), GenericTerm.class).
 					to(
 						target(wrap(GenericTerm.describing("underexploited")).with(identifierFor(targetDataProvider, new URI("urn:70")))).
-							asContributedBy(matcher("foo").scoring(0.49), 
-											matcher("bar").scoring(0.59),
-											matcher("baz").nonPerformed()
+							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.49), 
+											matcher(new URI("urn:matcher:bar")).scoring(0.59),
+											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.39)
 					).andTo(
 						target(wrap(GenericTerm.describing("und-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:97")))).
-							asContributedBy(matcher("foo").scoring(0.79), 
-											matcher("bar").nonPerformed(),
-											matcher("baz").nonPerformed()
+							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.79), 
+											matcher(new URI("urn:matcher:bar")).nonPerformed(),
+											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.79)
 					).andTo(
 						target(wrap(GenericTerm.describing("un-derexploited")).with(identifierFor(targetDataProvider, new URI("urn:98")))).
-							asContributedBy(matcher("foo").scoring(0.29), 
-											matcher("bar").nonPerformed(),
-											matcher("baz").scoring(0.39)
+							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.29), 
+											matcher(new URI("urn:matcher:bar")).nonPerformed(),
+											matcher(new URI("urn:matcher:baz")).scoring(0.39)
 							).withWeightedScore(0.35)
 					)
 		);

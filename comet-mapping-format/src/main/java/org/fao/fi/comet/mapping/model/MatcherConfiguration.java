@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,7 +40,7 @@ public class MatcherConfiguration implements Serializable {
 	@XmlAttribute(name="minimumScore") private double _minimumScore;
 	@XmlAttribute(name="weight") private double _weight;
 	@XmlAttribute(name="type") private String _matcherType;
-	@XmlAttribute(name="id") private String _matcherId;
+	@XmlAttribute(name="id") private URI _matcherId;
 	
 	@XmlElement(name="ConfigurationProperty")
 	private Collection<MatcherConfigurationProperty> _configurationProperties;
@@ -54,7 +55,7 @@ public class MatcherConfiguration implements Serializable {
 	/**
 	 * Class constructor
 	 */
-	public MatcherConfiguration(String id) {
+	public MatcherConfiguration(URI id) {
 		this(id, null, 1D, ScoreValue.NO_MATCH, false, new ArrayList<MatcherConfigurationProperty>());
 	}
 
@@ -68,7 +69,7 @@ public class MatcherConfiguration implements Serializable {
 	 * @param isOptional
 	 * @param configurationProperties
 	 */
-	public MatcherConfiguration(String matcherId, String matcherType, double weight, double minimumScore, boolean isOptional, Collection<MatcherConfigurationProperty> configurationProperties) {
+	public MatcherConfiguration(URI matcherId, String matcherType, double weight, double minimumScore, boolean isOptional, Collection<MatcherConfigurationProperty> configurationProperties) {
 		super();
 		this._matcherId = matcherId;
 		this._matcherType = matcherType;
@@ -83,14 +84,14 @@ public class MatcherConfiguration implements Serializable {
 	/**
 	 * @return the 'matcherId' value
 	 */
-	public String getMatcherId() {
+	public URI getMatcherId() {
 		return this._matcherId;
 	}
 
 	/**
 	 * @param matcherId the 'matcherId' value to set
 	 */
-	public void setMatcherId(String matcherId) {
+	public void setMatcherId(URI matcherId) {
 		this._matcherId = matcherId;
 	}
 

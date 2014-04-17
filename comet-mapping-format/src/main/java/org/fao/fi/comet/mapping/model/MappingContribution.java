@@ -4,6 +4,7 @@
 package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,7 +34,7 @@ public class MappingContribution implements Serializable {
 
 	@XmlAttribute(name="matcherScoreType") private MappingScoreType _matcherScoreType;
 	@XmlAttribute(name="matcherScore") private double _matcherScore;
-	@XmlAttribute(name="matcherId") private String _matcherId;
+	@XmlAttribute(name="matcherId") private URI _matcherId;
 	
 	/**
 	 * Class constructor
@@ -50,7 +51,7 @@ public class MappingContribution implements Serializable {
 	 * @param matcherScore
 	 * @param matcherScoreType
 	 */
-	public MappingContribution(String matcherId, double matcherScore, MappingScoreType matcherScoreType) {
+	public MappingContribution(URI matcherId, double matcherScore, MappingScoreType matcherScoreType) {
 		super();
 		this._matcherId = matcherId;
 		this._matcherScore = matcherScore;
@@ -61,14 +62,14 @@ public class MappingContribution implements Serializable {
 	/**
 	 * @return the 'matcherId' value
 	 */
-	public String getMatcherId() {
+	public URI getMatcherId() {
 		return this._matcherId;
 	}
 
 	/**
 	 * @param matcherId the 'matcherId' value to set
 	 */
-	public void setMatcherId(String matcherId) {
+	public void setMatcherId(URI matcherId) {
 		this._matcherId = matcherId;
 	}
 
