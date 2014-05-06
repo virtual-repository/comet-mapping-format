@@ -5,6 +5,7 @@ package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -65,8 +66,39 @@ public class DataProvider implements Serializable {
 	 *
 	 * @param identifier
 	 * @param type
+	 * @param description
+	 */
+	public DataProvider(String identifier, String type, String providedType, String description) {
+		super();
+		
+		this._type = type;
+		this._providedType = providedType;
+		this._description = description;
+
+		try {
+			this._identifier = new URI(identifier);
+		} catch(URISyntaxException USe) {
+			throw new IllegalArgumentException("Bad format for URI " + identifier + ": " + USe.getMessage(), USe);
+		}
+	}
+	
+	/**
+	 * Class constructor
+	 *
+	 * @param identifier
+	 * @param type
 	 */
 	public DataProvider(URI identifier, String providedType) {
+		this(identifier, providedType + "Provider", providedType, null);
+	}
+	
+	/**
+	 * Class constructor
+	 *
+	 * @param identifier
+	 * @param type
+	 */
+	public DataProvider(String identifier, String providedType) {
 		this(identifier, providedType + "Provider", providedType, null);
 	}
 

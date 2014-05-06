@@ -8,9 +8,12 @@ import java.io.StringReader;
 
 import javax.xml.bind.JAXBContext;
 
+import org.fao.fi.comet.mapping.model.Mapping;
 import org.fao.fi.comet.mapping.model.MappingData;
+import org.fao.fi.comet.mapping.model.MappingDetail;
 import org.fao.fi.comet.mapping.model.test.support.GenericTerm;
 import org.fao.fi.comet.mapping.model.test.support.mock.GenericTermMappingDataMock;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -68,7 +71,15 @@ public class TestSerialization {
 		
 		MappingData deserialized = (MappingData)ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
 		
-		System.out.println(deserialized);
+		for(Mapping in : deserialized.getMappings()) {
+			Assert.assertNotNull(in.getSource().getData());
+			Assert.assertTrue(org.w3c.dom.Element.class.isAssignableFrom(in.getSource().getData().getClass()));
+			
+			for(MappingDetail targets : in.getTargets()) {
+				Assert.assertNotNull(targets.getTargetElement().getData());
+				Assert.assertTrue(org.w3c.dom.Element.class.isAssignableFrom(targets.getTargetElement().getData().getClass()));
+			}
+		}
 	}
 	
 	@Test
@@ -86,5 +97,17 @@ public class TestSerialization {
 		
 		JAXBContext ctxUnmarshall = JAXBContext.newInstance(MappingData.class);
 		ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		MappingData deserialized = (MappingData)ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		for(Mapping in : deserialized.getMappings()) {
+			Assert.assertNotNull(in.getSource().getData());
+			Assert.assertTrue(org.w3c.dom.Element.class.isAssignableFrom(in.getSource().getData().getClass()));
+			
+			for(MappingDetail targets : in.getTargets()) {
+				Assert.assertNotNull(targets.getTargetElement().getData());
+				Assert.assertTrue(org.w3c.dom.Element.class.isAssignableFrom(targets.getTargetElement().getData().getClass()));
+			}
+		}
 	}
 }
