@@ -4,7 +4,6 @@
 package org.fao.fi.comet.mapping.dsl;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import org.fao.fi.comet.mapping.model.MappingContribution;
 
@@ -27,10 +26,6 @@ public class MappingContributionDSL {
 	}
 	
 	final static public MappingContribution matcher(String matcherIdURI) {
-		try {
-			return MappingContributionDSL.matcher(new URI(matcherIdURI));
-		} catch (URISyntaxException USe) {
-			throw new IllegalArgumentException("Bad format for URI " + matcherIdURI + ": " + USe.getMessage(), USe);
-		}
+		return MappingContributionDSL.matcher(URI.create(matcherIdURI));
 	}
 }

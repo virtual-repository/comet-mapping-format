@@ -53,6 +53,16 @@ public class MappingElementIdentifier implements Serializable {
 	}
 	
 	/**
+	 * Class constructor
+	 *
+	 * @param providerIdURI
+	 * @param elementIdURI
+	 */
+	public MappingElementIdentifier(String providerIdURI, String elementIdURI) {
+		this(URI.create(providerIdURI), URI.create(elementIdURI));
+	}
+	
+	/**
 	 * @return the 'providerId' value
 	 */
 	public final URI getProviderId() {

@@ -103,6 +103,10 @@ public class MappingElement implements Serializable {
 		return this.with(new MappingElementIdentifier(providerId, elementId));
 	}
 	
+	public MappingElement with(String providerIdURI, String elementIdURI) {
+		return this.with(URI.create(providerIdURI), URI.create(elementIdURI));
+	}
+	
 	 public MappingElement with(MappingElementIdentifier elementIdentifier) {
 		this.setId(elementIdentifier);
 		

@@ -31,6 +31,10 @@ public class MappingElementDSL {
 	final static public MappingElement wrap(URI providerId, URI elementId, Element data) {
 		return new MappingElement().with(providerId, elementId).wrapping(data);
 	}
+	
+	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Element data) {
+		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
+	}
 
 	final static public MappingElement wrap(Element data) {
 		return new MappingElement().wrapping(data);
@@ -38,6 +42,10 @@ public class MappingElementDSL {
 	
 	final static public MappingElement wrap(MappingElementIdentifier elementIdentifier, Object data) {
 		return new MappingElement().with(elementIdentifier).wrapping(DOMUtils.toElement(data));
+	}
+	
+	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Object data) {
+		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
 	}
 	
 	final static public MappingElement wrap(URI providerId, URI elementId, Object data) {

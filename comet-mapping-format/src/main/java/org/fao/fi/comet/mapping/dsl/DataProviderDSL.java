@@ -21,8 +21,16 @@ import org.fao.fi.comet.mapping.model.DataProvider;
  * @since 17 Apr 2014
  */
 public class DataProviderDSL {
+	final static public DataProvider provider(String identifierURI) {
+		return DataProviderDSL.provider(URI.create(identifierURI));
+	}
+	
 	final static public DataProvider provider(URI identifier) {
 		return new DataProvider(identifier, null);
+	}
+	
+	final static public DataProvider provider(String identifierURI, String providedType) {
+		return new DataProvider(URI.create(identifierURI), providedType);
 	}
 	
 	final static public DataProvider provider(URI identifier, String providedType) {

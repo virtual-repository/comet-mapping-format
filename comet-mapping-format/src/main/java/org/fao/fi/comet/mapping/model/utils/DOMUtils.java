@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  * @since 6 May 2014
  */
-public class DOMUtils {
+final public class DOMUtils {
 	final static private Map<Class<?>, JAXBContext> JAXB_CONTEXTS_MAP = new HashMap<Class<?>, JAXBContext>();
 	final static private Map<Class<?>, Marshaller> MARSHALLERS_MAP = new HashMap<Class<?>, Marshaller>();
 	

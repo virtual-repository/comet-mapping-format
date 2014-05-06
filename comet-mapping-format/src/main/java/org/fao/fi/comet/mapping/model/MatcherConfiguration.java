@@ -58,6 +58,13 @@ public class MatcherConfiguration implements Serializable {
 	public MatcherConfiguration(URI id) {
 		this(id, null, 1D, ScoreValue.NO_MATCH, false, new ArrayList<MatcherConfigurationProperty>());
 	}
+	
+	/**
+	 * Class constructor
+	 */
+	public MatcherConfiguration(String idURI) {
+		this(URI.create(idURI));
+	}
 
 	/**
 	 * Class constructor
@@ -79,7 +86,19 @@ public class MatcherConfiguration implements Serializable {
 		this._configurationProperties = configurationProperties;
 	}
 
-
+	/**
+	 * Class constructor
+	 *
+	 * @param matcherIdURI
+	 * @param matcherType
+	 * @param weight
+	 * @param minimumScore
+	 * @param isOptional
+	 * @param configurationProperties
+	 */
+	public MatcherConfiguration(String matcherIdURI, String matcherType, double weight, double minimumScore, boolean isOptional, Collection<MatcherConfigurationProperty> configurationProperties) {
+		this(URI.create(matcherIdURI), matcherType, weight, minimumScore, isOptional, configurationProperties);
+	}
 
 	/**
 	 * @return the 'matcherId' value

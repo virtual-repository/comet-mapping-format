@@ -5,7 +5,6 @@ package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -181,11 +180,7 @@ public class MappingData implements Serializable {
 	} 
 	
 	public MappingData id(String identifierURI) {
-		try {
-			return this.id(new URI(identifierURI));
-		} catch(URISyntaxException USe) {
-			throw new IllegalArgumentException("Bad format for URI " + identifierURI + ": " + USe.getMessage(), USe);
-		}
+		return this.id(URI.create(identifierURI));
 	} 
 	
 	public MappingData version(String version) {

@@ -4,7 +4,6 @@
 package org.fao.fi.comet.mapping.dsl;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import org.fao.fi.comet.mapping.ScoreValue;
 import org.fao.fi.comet.mapping.model.MatcherConfiguration;
@@ -34,12 +33,7 @@ public class MatcherConfigurationDSL {
 	}
 	
 	final static public MatcherConfiguration configuredMatcher(String idURI) {
-		try {
-			return MatcherConfigurationDSL.configuredMatcher(new URI(idURI));
-		} catch(URISyntaxException USe) {
-			throw new IllegalArgumentException("Bad format for URI " + idURI + ": " + USe.getMessage(), USe);
-		}
-		
+		return MatcherConfigurationDSL.configuredMatcher(URI.create(idURI));
 	}
 	
 	final static public double weight(double weight) {
