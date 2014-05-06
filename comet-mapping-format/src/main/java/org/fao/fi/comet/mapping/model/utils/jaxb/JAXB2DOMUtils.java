@@ -1,7 +1,7 @@
 /**
  * (c) 2014 FAO / UN (project: comet-mapping-format)
  */
-package org.fao.fi.comet.mapping.model.utils;
+package org.fao.fi.comet.mapping.model.utils.jaxb;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  * @version 1.0
  * @since 6 May 2014
  */
-final public class DOMUtils {
+final public class JAXB2DOMUtils {
 	final static private Map<Class<?>, JAXBContext> JAXB_CONTEXTS_MAP = new HashMap<Class<?>, JAXBContext>();
 	final static private Map<Class<?>, Marshaller> MARSHALLERS_MAP = new HashMap<Class<?>, Marshaller>();
 	

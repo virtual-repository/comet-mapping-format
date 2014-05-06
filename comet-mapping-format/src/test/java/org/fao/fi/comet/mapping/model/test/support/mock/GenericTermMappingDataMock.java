@@ -19,7 +19,7 @@ import java.util.Date;
 import org.fao.fi.comet.mapping.model.DataProvider;
 import org.fao.fi.comet.mapping.model.MappingData;
 import org.fao.fi.comet.mapping.model.test.support.GenericTerm;
-import org.fao.fi.comet.mapping.model.utils.DOMUtils;
+import org.fao.fi.comet.mapping.model.utils.jaxb.JAXB2DOMUtils;
 
 /**
  * Place your class / interface description here.
@@ -81,7 +81,7 @@ public class GenericTermMappingDataMock extends MappingData {
 			).
 			with(minimumWeightedScore(0.3), maximumCandidates(5)).
 			including(
-				map(wrap(DOMUtils.toElement(GenericTerm.describing("over-exploited"))).with(identifierFor(sourceDataProvider, "urn:1"))).
+				map(wrap(JAXB2DOMUtils.toElement(GenericTerm.describing("over-exploited"))).with(identifierFor(sourceDataProvider, "urn:1"))).
 					to(
 						target(wrap(GenericTerm.describing("overexploited")).with(identifierFor(targetDataProvider, "urn:69"))).
 							asContributedBy(matcher("urn:matcher:foo").scoring(0.39), 
@@ -96,7 +96,7 @@ public class GenericTermMappingDataMock extends MappingData {
 							).withWeightedScore(0.59)
 					)
 			).including(
-				map(wrap(DOMUtils.toElement(GenericTerm.describing("under-exploited"))).with(identifierFor(sourceDataProvider, "urn:2"))).
+				map(wrap(JAXB2DOMUtils.toElement(GenericTerm.describing("under-exploited"))).with(identifierFor(sourceDataProvider, "urn:2"))).
 					to(
 						target(wrap(GenericTerm.describing("underexploited")).with(identifierFor(targetDataProvider, "urn:70"))).
 							asContributedBy(matcher("urn:matcher:foo").scoring(0.49), 

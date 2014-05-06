@@ -5,7 +5,7 @@ package org.fao.fi.comet.mapping.model.test;
 
 import org.fao.fi.comet.mapping.model.MappingData;
 import org.fao.fi.comet.mapping.model.test.support.mock.GenericTermMappingDataMock;
-import org.fao.fi.comet.mapping.model.utils.SerializationUtils;
+import org.fao.fi.comet.mapping.model.utils.jaxb.JAXBDeSerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -27,11 +27,11 @@ public class TestSerializationUtils {
 	@Test public void testSerializeToXML() throws Throwable {
 		MappingData data = GenericTermMappingDataMock.newInstance();
 		
-		String XML = SerializationUtils.toXML(data).replaceAll("\r|\n", "");
+		String XML = JAXBDeSerializationUtils.toXML(data).replaceAll("\r|\n", "");
 		
-		MappingData rebuilt = SerializationUtils.fromXML(XML);
+		MappingData rebuilt = JAXBDeSerializationUtils.fromXML(XML);
 		
-		String rXML = SerializationUtils.toXML(rebuilt).replaceAll("\r|\n", "");
+		String rXML = JAXBDeSerializationUtils.toXML(rebuilt).replaceAll("\r|\n", "");
 		
 		Assert.assertEquals(XML, rXML);
 	}
@@ -39,13 +39,13 @@ public class TestSerializationUtils {
 	@Test public void testSerializeToDOM() throws Throwable {
 		MappingData data = GenericTermMappingDataMock.newInstance();
 		
-		String XML = SerializationUtils.toXML(data).replaceAll("\r|\n", "");
+		String XML = JAXBDeSerializationUtils.toXML(data).replaceAll("\r|\n", "");
 		
-		Document dom = SerializationUtils.toDocument(data);
+		Document dom = JAXBDeSerializationUtils.toDocument(data);
 		
-		MappingData rebuilt = SerializationUtils.fromDocument(dom);
+		MappingData rebuilt = JAXBDeSerializationUtils.fromDocument(dom);
 		
-		String rXML = SerializationUtils.toXML(rebuilt).replaceAll("\r|\n", "");
+		String rXML = JAXBDeSerializationUtils.toXML(rebuilt).replaceAll("\r|\n", "");
 		
 		Assert.assertEquals(XML, rXML);
 	}
