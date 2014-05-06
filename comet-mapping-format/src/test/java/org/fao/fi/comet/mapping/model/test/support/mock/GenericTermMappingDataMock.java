@@ -84,13 +84,13 @@ public class GenericTermMappingDataMock extends MappingData {
 			including(
 				map(wrap(DOMUtils.toElement(GenericTerm.describing("over-exploited"))).with(identifierFor(sourceDataProvider, new URI("urn:1")))).
 					to(
-						target(wrap(DOMUtils.toElement(GenericTerm.describing("overexploited"))).with(identifierFor(targetDataProvider, new URI("urn:69")))).
+						target(wrap(GenericTerm.describing("overexploited")).with(identifierFor(targetDataProvider, new URI("urn:69")))).
 							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.39), 
 											matcher(new URI("urn:matcher:bar")).scoring(0.69),
 											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.59)
 					).andTo(
-						target(wrap(DOMUtils.toElement(GenericTerm.describing("ov-erexploited"))).with(identifierFor(targetDataProvider, new URI("urn:96")))).
+						target(wrap(GenericTerm.describing("ov-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:96")))).
 							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.79), 
 											matcher(new URI("urn:matcher:bar")).nonPerformed(),
 											matcher(new URI("urn:matcher:baz")).nonPerformed()
@@ -99,19 +99,19 @@ public class GenericTermMappingDataMock extends MappingData {
 			).including(
 				map(wrap(DOMUtils.toElement(GenericTerm.describing("under-exploited"))).with(identifierFor(sourceDataProvider, new URI("urn:2")))).
 					to(
-						target(wrap(DOMUtils.toElement(GenericTerm.describing("underexploited"))).with(identifierFor(targetDataProvider, new URI("urn:70")))).
+						target(wrap(GenericTerm.describing("underexploited")).with(identifierFor(targetDataProvider, new URI("urn:70")))).
 							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.49), 
 											matcher(new URI("urn:matcher:bar")).scoring(0.59),
 											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.39)
 					).andTo(
-						target(wrap(DOMUtils.toElement(GenericTerm.describing("und-erexploited"))).with(identifierFor(targetDataProvider, new URI("urn:97")))).
+						target(wrap(GenericTerm.describing("und-erexploited")).with(identifierFor(targetDataProvider, new URI("urn:97")))).
 							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.79), 
 											matcher(new URI("urn:matcher:bar")).nonPerformed(),
 											matcher(new URI("urn:matcher:baz")).nonPerformed()
 							).withWeightedScore(0.79)
 					).andTo(
-						target(wrap(DOMUtils.toElement(GenericTerm.describing("un-derexploited"))).with(identifierFor(targetDataProvider, new URI("urn:98")))).
+						target(wrap(GenericTerm.describing("un-derexploited")).with(identifierFor(targetDataProvider, new URI("urn:98")))).
 							asContributedBy(matcher(new URI("urn:matcher:foo")).scoring(0.29), 
 											matcher(new URI("urn:matcher:bar")).nonPerformed(),
 											matcher(new URI("urn:matcher:baz")).scoring(0.39)

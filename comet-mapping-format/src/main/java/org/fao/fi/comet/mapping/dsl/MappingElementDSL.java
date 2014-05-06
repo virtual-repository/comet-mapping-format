@@ -7,6 +7,7 @@ import java.net.URI;
 
 import org.fao.fi.comet.mapping.model.MappingElement;
 import org.fao.fi.comet.mapping.model.MappingElementIdentifier;
+import org.fao.fi.comet.mapping.model.utils.DOMUtils;
 import org.w3c.dom.Element;
 
 /**
@@ -33,5 +34,17 @@ public class MappingElementDSL {
 
 	final static public MappingElement wrap(Element data) {
 		return new MappingElement().wrapping(data);
+	}
+	
+	final static public MappingElement wrap(MappingElementIdentifier elementIdentifier, Object data) {
+		return new MappingElement().with(elementIdentifier).wrapping(DOMUtils.toElement(data));
+	}
+	
+	final static public MappingElement wrap(URI providerId, URI elementId, Object data) {
+		return new MappingElement().with(providerId, elementId).wrapping(DOMUtils.toElement(data));
+	}
+
+	final static public MappingElement wrap(Object data) {
+		return new MappingElement().wrapping(DOMUtils.toElement(data));
 	}
 }
