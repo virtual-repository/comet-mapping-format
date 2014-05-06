@@ -3,7 +3,7 @@
  */
 package org.fao.fi.comet.mapping.dsl;
 
-import org.fao.fi.comet.mapping.model.Element;
+import org.fao.fi.comet.mapping.model.MappingElement;
 import org.fao.fi.comet.mapping.model.MappingDetail;
 
 /**
@@ -20,7 +20,7 @@ import org.fao.fi.comet.mapping.model.MappingDetail;
  * @since 17 Apr 2014
  */
 public class MappingDetailDSL {
-	final static public <T> MappingDetail<T> target(Element<T> target) {
+	final static public <T> MappingDetail<T> target(MappingElement<T> target) {
 		MappingDetail<T> mapping = new MappingDetail<T>();
 		mapping.setTargetElement(target);
 		

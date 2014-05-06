@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="ElementIdentifier")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ElementIdentifier implements Serializable {
+public class MappingElementIdentifier implements Serializable {
 	private static final long serialVersionUID = 3461143166759375588L;
 
 	@XmlAttribute(name="elementId") private URI _elementId;
@@ -36,7 +36,7 @@ public class ElementIdentifier implements Serializable {
 	 * Class constructor
 	 *
 	 */
-	public ElementIdentifier() {
+	public MappingElementIdentifier() {
 		super();
 	}
 
@@ -46,7 +46,7 @@ public class ElementIdentifier implements Serializable {
 	 * @param providerId
 	 * @param elementId
 	 */
-	public ElementIdentifier(URI providerId, URI elementId) {
+	public MappingElementIdentifier(URI providerId, URI elementId) {
 		super();
 		this._providerId = providerId;
 		this._elementId = elementId;
@@ -103,7 +103,7 @@ public class ElementIdentifier implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ElementIdentifier other = (ElementIdentifier) obj;
+		MappingElementIdentifier other = (MappingElementIdentifier) obj;
 		if (this._elementId == null) {
 			if (other._elementId != null)
 				return false;

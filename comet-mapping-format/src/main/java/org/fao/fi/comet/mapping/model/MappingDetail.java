@@ -40,7 +40,7 @@ public class MappingDetail<TARGET> implements Serializable {
 	private Collection<MappingContribution> _mappingContributions;
 	
 	@XmlElement(name="TargetElement")
-	private Element<TARGET> _targetElement;
+	private MappingElement<TARGET> _targetElement;
 
 	/**
 	 * Class constructor
@@ -58,7 +58,7 @@ public class MappingDetail<TARGET> implements Serializable {
 	 * @param mappingContributions
 	 * @param targetElement
 	 */
-	public MappingDetail(double score, MappingScoreType scoreType, Collection<MappingContribution> mappingContributions, Element<TARGET> targetElement) {
+	public MappingDetail(double score, MappingScoreType scoreType, Collection<MappingContribution> mappingContributions, MappingElement<TARGET> targetElement) {
 		super();
 		this._score = score;
 		this._scoreType = scoreType;
@@ -137,14 +137,14 @@ public class MappingDetail<TARGET> implements Serializable {
 	/**
 	 * @return the 'targetElement' value
 	 */
-	public final Element<TARGET> getTargetElement() {
+	public final MappingElement<TARGET> getTargetElement() {
 		return this._targetElement;
 	}
 
 	/**
 	 * @param targetElement the 'targetElement' value to set
 	 */
-	public final void setTargetElement(Element<TARGET> targetElement) {
+	public final void setTargetElement(MappingElement<TARGET> targetElement) {
 		this._targetElement = targetElement;
 	}
 

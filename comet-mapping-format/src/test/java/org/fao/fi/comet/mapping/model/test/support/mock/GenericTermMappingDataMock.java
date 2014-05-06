@@ -3,8 +3,8 @@
  */
 package org.fao.fi.comet.mapping.model.test.support.mock;
 
-import static org.fao.fi.comet.mapping.dsl.ElementDSL.wrap;
-import static org.fao.fi.comet.mapping.dsl.ElementIdentifierDSL.identifierFor;
+import static org.fao.fi.comet.mapping.dsl.MappingElementDSL.wrap;
+import static org.fao.fi.comet.mapping.dsl.MappingElementIdentifierDSL.identifierFor;
 import static org.fao.fi.comet.mapping.dsl.MappingContributionDSL.matcher;
 import static org.fao.fi.comet.mapping.dsl.MappingDSL.map;
 import static org.fao.fi.comet.mapping.dsl.MappingDataDSL.maximumCandidates;

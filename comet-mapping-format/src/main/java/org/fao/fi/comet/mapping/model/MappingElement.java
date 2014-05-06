@@ -26,11 +26,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Element<TYPE> implements Serializable {
+public class MappingElement<TYPE> implements Serializable {
 	private static final long serialVersionUID = 2149883627044381192L;
 
 	@XmlElement(name="ElementIdentifier")
-	private ElementIdentifier _id;
+	private MappingElementIdentifier _id;
 	
 	@XmlAnyElement(lax=true)
 	private TYPE _data;
@@ -39,14 +39,14 @@ public class Element<TYPE> implements Serializable {
 	 * Class constructor
 	 *
 	 */
-	public Element() {
+	public MappingElement() {
 		super();
 	}
 	
 	/**
 	 * @param id
 	 */
-	public Element(ElementIdentifier id) {
+	public MappingElement(MappingElementIdentifier id) {
 		super();
 		this._id = id;
 	}
@@ -54,7 +54,7 @@ public class Element<TYPE> implements Serializable {
 	/**
 	 * @param data
 	 */
-	public Element(TYPE data) {
+	public MappingElement(TYPE data) {
 		super();
 		this._data = data;
 	}
@@ -63,7 +63,7 @@ public class Element<TYPE> implements Serializable {
 	 * @param id
 	 * @param data
 	 */
-	public Element(ElementIdentifier id, TYPE data) {
+	public MappingElement(MappingElementIdentifier id, TYPE data) {
 		super();
 		this._id = id;
 		this._data = data;
@@ -72,14 +72,14 @@ public class Element<TYPE> implements Serializable {
 	/**
 	 * @return the 'id' value
 	 */
-	public final ElementIdentifier getId() {
+	public final MappingElementIdentifier getId() {
 		return this._id;
 	}
 
 	/**
 	 * @param id the 'id' value to set
 	 */
-	public final void setId(ElementIdentifier id) {
+	public final void setId(MappingElementIdentifier id) {
 		this._id = id;
 	}
 
@@ -97,17 +97,17 @@ public class Element<TYPE> implements Serializable {
 		this._data = data;
 	}
 	
-	public Element<TYPE> with(URI providerId, URI elementId) {
-		return this.with(new ElementIdentifier(providerId, elementId));
+	public MappingElement<TYPE> with(URI providerId, URI elementId) {
+		return this.with(new MappingElementIdentifier(providerId, elementId));
 	}
 	
-	 public Element<TYPE> with(ElementIdentifier elementIdentifier) {
+	 public MappingElement<TYPE> with(MappingElementIdentifier elementIdentifier) {
 		this.setId(elementIdentifier);
 		
 		return this;
 	}
 	
-	public Element<TYPE> wrapping(TYPE data) {
+	public MappingElement<TYPE> wrapping(TYPE data) {
 		this._data = data;
 		
 		return this;
@@ -137,7 +137,7 @@ public class Element<TYPE> implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		@SuppressWarnings("rawtypes")
-		Element other = (Element) obj;
+		MappingElement other = (MappingElement) obj;
 		if (this._data == null) {
 			if (other._data != null)
 				return false;

@@ -5,7 +5,7 @@ package org.fao.fi.comet.mapping.dsl;
 
 import java.util.ArrayList;
 
-import org.fao.fi.comet.mapping.model.Element;
+import org.fao.fi.comet.mapping.model.MappingElement;
 import org.fao.fi.comet.mapping.model.Mapping;
 import org.fao.fi.comet.mapping.model.MappingDetail;
 
@@ -23,7 +23,7 @@ import org.fao.fi.comet.mapping.model.MappingDetail;
  * @since 17 Apr 2014
  */
 public class MappingDSL {
-	final static public <S, T> Mapping<S, T> map(Element<S> source, Class<T> targetClazz) {
+	final static public <S, T> Mapping<S, T> map(MappingElement<S> source, Class<T> targetClazz) {
 		return new Mapping<S, T>(source, new ArrayList<MappingDetail<T>>());
 	}
 }

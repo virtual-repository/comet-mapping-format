@@ -34,7 +34,7 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 	private static final long serialVersionUID = 6031559793227240424L;
 	
 	@XmlElement(name="SourceElement")
-	private Element<SOURCE> _source;
+	private MappingElement<SOURCE> _source;
 	
 	@XmlElementWrapper(name="TargetElementMappings")
 	@XmlElement(name="MappingDetail")
@@ -54,7 +54,7 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 	 * @param source
 	 * @param targets
 	 */
-	public Mapping(Element<SOURCE> source, Collection<MappingDetail<TARGET>> targets) {
+	public Mapping(MappingElement<SOURCE> source, Collection<MappingDetail<TARGET>> targets) {
 		super();
 		this._source = source;
 		this._targets = targets;
@@ -63,14 +63,14 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 	/**
 	 * @return the 'source' value
 	 */
-	public final Element<SOURCE> getSource() {
+	public final MappingElement<SOURCE> getSource() {
 		return this._source;
 	}
 	
 	/**
 	 * @param source the 'source' value to set
 	 */
-	public final void setSource(Element<SOURCE> source) {
+	public final void setSource(MappingElement<SOURCE> source) {
 		this._source = source;
 	}
 	
