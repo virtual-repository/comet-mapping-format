@@ -7,6 +7,8 @@ import java.net.URI;
 
 import org.fao.fi.comet.mapping.model.MappingElement;
 import org.fao.fi.comet.mapping.model.MappingElementIdentifier;
+import org.fao.fi.comet.mapping.model.utils.DOMUtils;
+import org.w3c.dom.Element;
 
 /**
  * Place your class / interface description here.
@@ -16,21 +18,41 @@ import org.fao.fi.comet.mapping.model.MappingElementIdentifier;
  * ------------- --------------- -----------------------
  * Date			 Author			 Comment
  * ------------- --------------- -----------------------
- * 17 Apr 2014   Fiorellato     Creation.
+ * 17 Apr 2014  Fiorellato   Creation.
  *
  * @version 1.0
  * @since 17 Apr 2014
  */
 public class MappingElementDSL {
-	final static public <T> MappingElement<T> wrap(MappingElementIdentifier elementIdentifier, T data) {
-		return new MappingElement<T>().with(elementIdentifier).wrapping(data);
+	final static public MappingElement wrap(MappingElementIdentifier elementIdentifier, Element data) {
+		return new MappingElement().with(elementIdentifier).wrapping(data);
 	}
 
-	final static public <T> MappingElement<T> wrap(URI providerId, URI elementId, T data) {
-		return new MappingElement<T>().with(providerId, elementId).wrapping(data);
+	final static public MappingElement wrap(URI providerId, URI elementId, Element data) {
+		return new MappingElement().with(providerId, elementId).wrapping(data);
+	}
+	
+	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Element data) {
+		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
 	}
 
-	final static public <T> MappingElement<T> wrap(T data) {
-		return new MappingElement<T>().wrapping(data);
+	final static public MappingElement wrap(Element data) {
+		return new MappingElement().wrapping(data);
+	}
+	
+	final static public MappingElement wrap(MappingElementIdentifier elementIdentifier, Object data) {
+		return new MappingElement().with(elementIdentifier).wrapping(DOMUtils.toElement(data));
+	}
+	
+	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Object data) {
+		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
+	}
+	
+	final static public MappingElement wrap(URI providerId, URI elementId, Object data) {
+		return new MappingElement().with(providerId, elementId).wrapping(DOMUtils.toElement(data));
+	}
+
+	final static public MappingElement wrap(Object data) {
+		return new MappingElement().wrapping(DOMUtils.toElement(data));
 	}
 }

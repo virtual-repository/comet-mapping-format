@@ -20,8 +20,8 @@ import org.fao.fi.comet.mapping.model.MappingDetail;
  * @since 17 Apr 2014
  */
 public class MappingDetailDSL {
-	final static public <T> MappingDetail<T> target(MappingElement<T> target) {
-		MappingDetail<T> mapping = new MappingDetail<T>();
+	final static public MappingDetail target(MappingElement target) {
+		MappingDetail mapping = new MappingDetail();
 		mapping.setTargetElement(target);
 		
 		return mapping;

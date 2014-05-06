@@ -30,7 +30,15 @@ public class MappingElementIdentifierDSL {
 		return new MappingElementIdentifier(providerId, elementId);
 	}
 	
+	final static public MappingElementIdentifier identifier(String providerIdURI, String elementIdURI) {
+		return MappingElementIdentifierDSL.identifier(URI.create(providerIdURI), URI.create(elementIdURI));
+	}
+	
 	final static public MappingElementIdentifier identifierFor(DataProvider provider, URI elementId) {
 		return new MappingElementIdentifier(provider.getIdentifier(), elementId);
+	}
+	
+	final static public MappingElementIdentifier identifierFor(DataProvider provider, String elementIdURI) {
+		return MappingElementIdentifierDSL.identifier(provider.getIdentifier(), URI.create(elementIdURI));
 	}
 }

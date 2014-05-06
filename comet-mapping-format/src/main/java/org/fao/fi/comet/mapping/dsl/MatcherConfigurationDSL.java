@@ -27,8 +27,13 @@ public class MatcherConfigurationDSL {
 		
 		return configuration;
 	}
+	
 	final static public MatcherConfiguration configuredMatcher(URI id) {
 		return new MatcherConfiguration(id);
+	}
+	
+	final static public MatcherConfiguration configuredMatcher(String idURI) {
+		return MatcherConfigurationDSL.configuredMatcher(URI.create(idURI));
 	}
 	
 	final static public double weight(double weight) {

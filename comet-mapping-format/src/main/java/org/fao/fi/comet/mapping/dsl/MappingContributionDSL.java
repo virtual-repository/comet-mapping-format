@@ -24,4 +24,8 @@ public class MappingContributionDSL {
 	final static public MappingContribution matcher(URI matcherId) {
 		return new MappingContribution(matcherId, 0D, null);
 	}
+	
+	final static public MappingContribution matcher(String matcherIdURI) {
+		return MappingContributionDSL.matcher(URI.create(matcherIdURI));
+	}
 }
