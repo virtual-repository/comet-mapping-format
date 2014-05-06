@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="Mapping")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Mapping<SOURCE, TARGET> implements Serializable {
+public class Mapping implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 6031559793227240424L;
 	
 	@XmlElement(name="SourceElement")
-	private MappingElement<SOURCE> _source;
+	private MappingElement _source;
 	
 	@XmlElementWrapper(name="TargetElementMappings")
 	@XmlElement(name="MappingDetail")
-	private Collection<MappingDetail<TARGET>> _targets;
+	private Collection<MappingDetail> _targets;
 	
 	/**
 	 * Class constructor
@@ -54,7 +54,7 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 	 * @param source
 	 * @param targets
 	 */
-	public Mapping(MappingElement<SOURCE> source, Collection<MappingDetail<TARGET>> targets) {
+	public Mapping(MappingElement source, Collection<MappingDetail> targets) {
 		super();
 		this._source = source;
 		this._targets = targets;
@@ -63,47 +63,46 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 	/**
 	 * @return the 'source' value
 	 */
-	public final MappingElement<SOURCE> getSource() {
+	public final MappingElement getSource() {
 		return this._source;
 	}
 	
 	/**
 	 * @param source the 'source' value to set
 	 */
-	public final void setSource(MappingElement<SOURCE> source) {
+	public final void setSource(MappingElement source) {
 		this._source = source;
 	}
 	
 	/**
 	 * @return the 'targets' value
 	 */
-	public final Collection<MappingDetail<TARGET>> getTargets() {
+	public final Collection<MappingDetail> getTargets() {
 		return this._targets;
 	}
 	
 	/**
 	 * @param targets the 'targets' value to set
 	 */
-	public final void setTargets(Collection<MappingDetail<TARGET>> targets) {
+	public final void setTargets(Collection<MappingDetail> targets) {
 		this._targets = targets;
 	}
 	
-	public final Mapping<SOURCE, TARGET> to(MappingDetail<TARGET> target) {
+	public final Mapping to(MappingDetail target) {
 		return this.andTo(target);
 	}
 
-	public final Mapping<SOURCE, TARGET> to(MappingDetail<TARGET>... targets) {
+	public final Mapping to(MappingDetail... targets) {
 		return this.andTo(targets);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public final Mapping<SOURCE, TARGET> andTo(MappingDetail<TARGET> target) {
+	public final Mapping andTo(MappingDetail target) {
 		return this.andTo(new MappingDetail[] { target });
 	}
 	
-	public final Mapping<SOURCE, TARGET> andTo(MappingDetail<TARGET>... targets) {
+	public final Mapping andTo(MappingDetail... targets) {
 		if(this._targets == null)
-			this._targets = new ArrayList<MappingDetail<TARGET>>();
+			this._targets = new ArrayList<MappingDetail>();
 		
 		this._targets.addAll(Arrays.asList(targets));
 		
@@ -137,7 +136,6 @@ public class Mapping<SOURCE, TARGET> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		@SuppressWarnings("rawtypes")
 		Mapping other = (Mapping) obj;
 		if (this._source == null) {
 			if (other._source != null)

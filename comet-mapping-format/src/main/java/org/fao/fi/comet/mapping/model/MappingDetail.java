@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name="MappingDetail")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MappingDetail<TARGET> implements Serializable {
+public class MappingDetail implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = -1479077411818857917L;
 
@@ -40,7 +40,7 @@ public class MappingDetail<TARGET> implements Serializable {
 	private Collection<MappingContribution> _mappingContributions;
 	
 	@XmlElement(name="TargetElement")
-	private MappingElement<TARGET> _targetElement;
+	private MappingElement _targetElement;
 
 	/**
 	 * Class constructor
@@ -58,7 +58,7 @@ public class MappingDetail<TARGET> implements Serializable {
 	 * @param mappingContributions
 	 * @param targetElement
 	 */
-	public MappingDetail(double score, MappingScoreType scoreType, Collection<MappingContribution> mappingContributions, MappingElement<TARGET> targetElement) {
+	public MappingDetail(double score, MappingScoreType scoreType, Collection<MappingContribution> mappingContributions, MappingElement targetElement) {
 		super();
 		this._score = score;
 		this._scoreType = scoreType;
@@ -108,24 +108,24 @@ public class MappingDetail<TARGET> implements Serializable {
 		this._mappingContributions = mappingContributions;
 	}
 	
-	public MappingDetail<TARGET> withMappingScore(double score, MappingScoreType type) {
+	public MappingDetail withMappingScore(double score, MappingScoreType type) {
 		this._score = score;
 		this._scoreType = type;
 		
 		return this;
 	}
 	
-	public MappingDetail<TARGET> withWeightedScore(double score) {
+	public MappingDetail withWeightedScore(double score) {
 		return this.withMappingScore(score, MappingScoreType.NON_AUTHORITATIVE);
 	}
 	
-	public MappingDetail<TARGET> asContributedBy(MappingContribution... mappingContributions) {
+	public MappingDetail asContributedBy(MappingContribution... mappingContributions) {
 		this._mappingContributions = new ArrayList<MappingContribution>(Arrays.asList(mappingContributions));
 		
 		return this;
 	}
 	
-	public MappingDetail<TARGET> and(MappingContribution... mappingContributions) {
+	public MappingDetail and(MappingContribution... mappingContributions) {
 		if(this._mappingContributions == null)
 			this.asContributedBy(mappingContributions);
 		else for(MappingContribution in : mappingContributions)
@@ -137,14 +137,14 @@ public class MappingDetail<TARGET> implements Serializable {
 	/**
 	 * @return the 'targetElement' value
 	 */
-	public final MappingElement<TARGET> getTargetElement() {
+	public final MappingElement getTargetElement() {
 		return this._targetElement;
 	}
 
 	/**
 	 * @param targetElement the 'targetElement' value to set
 	 */
-	public final void setTargetElement(MappingElement<TARGET> targetElement) {
+	public final void setTargetElement(MappingElement targetElement) {
 		this._targetElement = targetElement;
 	}
 
@@ -174,8 +174,7 @@ public class MappingDetail<TARGET> implements Serializable {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
-			return false;
-		@SuppressWarnings("rawtypes")
+			return false;		
 		MappingDetail other = (MappingDetail) obj;
 		if (this._mappingContributions == null) {
 			if (other._mappingContributions != null)

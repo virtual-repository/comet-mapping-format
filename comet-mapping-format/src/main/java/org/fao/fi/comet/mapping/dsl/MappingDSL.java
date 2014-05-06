@@ -23,7 +23,7 @@ import org.fao.fi.comet.mapping.model.MappingDetail;
  * @since 17 Apr 2014
  */
 public class MappingDSL {
-	final static public <S, T> Mapping<S, T> map(MappingElement<S> source, Class<T> targetClazz) {
-		return new Mapping<S, T>(source, new ArrayList<MappingDetail<T>>());
+	final static public Mapping map(MappingElement source) {
+		return new Mapping(source, new ArrayList<MappingDetail>());
 	}
 }

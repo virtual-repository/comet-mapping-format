@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="MappingData")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MappingData<SOURCE, TARGET> implements Serializable {
+public class MappingData implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5556836524367681531L;
 	
@@ -52,7 +52,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	private Collection<MatcherConfiguration> _matcherConfiguration;
 	
 	@XmlElement(name="Mapping")
-	private Collection<Mapping<SOURCE, TARGET>> _mappings;
+	private Collection<Mapping> _mappings;
 
 	/**
 	 * Class constructor
@@ -162,42 +162,42 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	/**
 	 * @return the 'mappings' value
 	 */
-	public Collection<Mapping<SOURCE, TARGET>> getMappings() {
+	public Collection<Mapping> getMappings() {
 		return this._mappings;
 	}
 
 	/**
 	 * @param mappings the 'mappings' value to set
 	 */
-	public void setMappings(Collection<Mapping<SOURCE, TARGET>> mappings) {
+	public void setMappings(Collection<Mapping> mappings) {
 		this._mappings = mappings;
 	}
 	
-	public MappingData<SOURCE, TARGET> id(URI identifier) {
+	public MappingData id(URI identifier) {
 		this._identifier = identifier;
 		
 		return this;
 	} 
 	
-	public MappingData<SOURCE, TARGET> version(String version) {
+	public MappingData version(String version) {
 		this._version = version;
 		
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> producedBy(String producer) {
+	public MappingData producedBy(String producer) {
 		this._producedBy = producer;
 		
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> on(Date date) {
+	public MappingData on(Date date) {
 		this._producedOn = date;
 		
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> linking(DataProvider source) {
+	public MappingData linking(DataProvider source) {
 		if(this._processConfiguration == null)
 			this._processConfiguration = new ProcessConfiguration();
 		
@@ -206,7 +206,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> to(DataProvider target) {
+	public MappingData to(DataProvider target) {
 		if(this._processConfiguration == null)
 			this._processConfiguration = new ProcessConfiguration();
 		
@@ -215,7 +215,7 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> with(double minimumScore, int maximumNumberOfCandidates) {
+	public MappingData with(double minimumScore, int maximumNumberOfCandidates) {
 		if(this._processConfiguration == null)
 			this._processConfiguration = new ProcessConfiguration();
 		
@@ -225,20 +225,19 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		return this;
 	}
 	
-	public MappingData<SOURCE, TARGET> through(MatcherConfiguration... matchers) {
+	public MappingData through(MatcherConfiguration... matchers) {
 		this._matcherConfiguration = Arrays.asList(matchers);
 		
 		return this;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public MappingData<SOURCE, TARGET> including(Mapping<SOURCE, TARGET> mapping) {
+	public MappingData including(Mapping mapping) {
 		return this.include(new Mapping[] { mapping });
 	}
 	
-	public MappingData<SOURCE, TARGET> include(Mapping<SOURCE, TARGET>... mappings) {
+	public MappingData include(Mapping... mappings) {
 		if(this._mappings == null)
-			this._mappings = new ArrayList<Mapping<SOURCE, TARGET>>();
+			this._mappings = new ArrayList<Mapping>();
 		
 		this._mappings.addAll(Arrays.asList(mappings));
 		
@@ -246,13 +245,13 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 	}
 	
 	//Move the following four methods elsewhere?
-	public Collection<MappingDetail<TARGET>> mappingsFor(MappingElement<SOURCE> source) {
-		Collection<MappingDetail<TARGET>> found = new ArrayList<MappingDetail<TARGET>>();
+	public Collection<MappingDetail> mappingsFor(MappingElement source) {
+		Collection<MappingDetail> found = new ArrayList<MappingDetail>();
 		
 		final MappingElementIdentifier toFind = source.getId();
 		
 		if(this._mappings != null) {
-			for(Mapping<SOURCE, TARGET> in : this._mappings)
+			for(Mapping in : this._mappings)
 				if(toFind.equals(in.getSource().getId()))
 					found.addAll(in.getTargets());
 		}
@@ -265,9 +264,9 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 		Collection<MappingElementIdentifier> found = new ArrayList<MappingElementIdentifier>();
 		
 		if(this._mappings != null) {
-			for(Mapping<SOURCE, TARGET> in : this._mappings)
+			for(Mapping in : this._mappings)
 				if(sourceIdentifier.equals(in.getSource().getId())) {
-					for(MappingDetail<TARGET> of : in.getTargets())
+					for(MappingDetail of : in.getTargets())
 						found.add(of.getTargetElement().getId());
 				}
 		}
@@ -313,7 +312,6 @@ public class MappingData<SOURCE, TARGET> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		@SuppressWarnings("rawtypes")
 		MappingData other = (MappingData) obj;
 		if (this._description == null) {
 			if (other._description != null)
