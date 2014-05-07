@@ -140,7 +140,7 @@ public class GenericTermMappingDataMock extends MappingData {
 						target(nil().with(identifierFor(targetDataProvider, "urn:96")))
 					)
 			).including(
-				map(wrap(JAXB2DOMUtils.toElement(GenericTerm.describing("under-exploited"))).with(identifierFor(sourceDataProvider, "urn:2"))).
+				map(nil().with(identifierFor(sourceDataProvider, "urn:2"))).
 					to(
 						target(nil().with(identifierFor(targetDataProvider, "urn:70")))
 					).andTo(
