@@ -110,4 +110,58 @@ public class TestSerialization {
 			}
 		}
 	}
+	
+	@Test
+	public void roundtripWithNilsAndNoDeps() throws Throwable {
+		MappingData data = GenericTermMappingDataMock.newInstanceWithNils();
+		
+		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
+		ctxMarshall.createMarshaller().marshal(data, baos);
+		
+		String xml = new String(baos.toByteArray(), "UTF-8");
+		
+		System.out.println("Serialized without deps: " + xml);
+		
+		JAXBContext ctxUnmarshall = JAXBContext.newInstance(MappingData.class);
+		ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		MappingData deserialized = (MappingData)ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		for(Mapping in : deserialized.getMappings()) {
+			Assert.assertNull(in.getSource().getData());
+			
+			for(MappingDetail targets : in.getTargets()) {
+				Assert.assertNull(targets.getTargetElement().getData());
+			}
+		}
+	}
+	
+	@Test
+	public void roundtripWithNilsAndDeps() throws Throwable {
+		MappingData data = GenericTermMappingDataMock.newInstanceWithNils();
+		
+		JAXBContext ctxMarshall = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
+		ctxMarshall.createMarshaller().marshal(data, baos);
+		
+		String xml = new String(baos.toByteArray(), "UTF-8");
+		
+		System.out.println("Serialized without deps: " + xml);
+		
+		JAXBContext ctxUnmarshall = JAXBContext.newInstance(MappingData.class, GenericTerm.class);
+		ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		MappingData deserialized = (MappingData)ctxUnmarshall.createUnmarshaller().unmarshal(new StringReader(xml));
+		
+		for(Mapping in : deserialized.getMappings()) {
+			Assert.assertNull(in.getSource().getData());
+			
+			for(MappingDetail targets : in.getTargets()) {
+				Assert.assertNull(targets.getTargetElement().getData());
+			}
+		}
+	}
 }

@@ -55,4 +55,16 @@ public class MappingElementDSL {
 	final static public MappingElement wrap(Object data) {
 		return new MappingElement().wrapping(JAXB2DOMUtils.toElement(data));
 	}
+	
+	final static public MappingElement nil() {
+		return new MappingElement().wrapping(null);
+	}
+	
+	final static public MappingElement nil(URI providerId, URI elementId) {
+		return new MappingElement().with(providerId, elementId).wrapping(null);
+	}
+	
+	final static public MappingElement nil(String providerIdURI, String elementIdURI) {
+		return new MappingElement().with(URI.create(providerIdURI), URI.create(elementIdURI)).wrapping(null);
+	}
 }

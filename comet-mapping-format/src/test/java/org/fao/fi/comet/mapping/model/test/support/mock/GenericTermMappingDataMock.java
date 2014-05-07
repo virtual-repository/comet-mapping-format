@@ -9,6 +9,7 @@ import static org.fao.fi.comet.mapping.dsl.MappingDataDSL.maximumCandidates;
 import static org.fao.fi.comet.mapping.dsl.MappingDataDSL.minimumWeightedScore;
 import static org.fao.fi.comet.mapping.dsl.MappingDetailDSL.target;
 import static org.fao.fi.comet.mapping.dsl.MappingElementDSL.wrap;
+import static org.fao.fi.comet.mapping.dsl.MappingElementDSL.nil;
 import static org.fao.fi.comet.mapping.dsl.MappingElementIdentifierDSL.identifierFor;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.configuredMatcher;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.optional;
@@ -115,6 +116,37 @@ public class GenericTermMappingDataMock extends MappingData {
 											matcher("urn:matcher:bar").nonPerformed(),
 											matcher("urn:matcher:baz").scoring(0.39)
 							).withWeightedScore(0.35)
+					)
+		);
+		
+		return mappingData;
+	}
+	
+	static final public MappingData newInstanceWithNils() throws Throwable {
+		DataProvider sourceDataProvider = new DataProvider("urn:fooResourceStatus", GenericTerm.class.getName());
+		DataProvider targetDataProvider = new DataProvider("urn:barResourceStatus", GenericTerm.class.getName());
+		
+		MappingData mappingData = new MappingData().
+			id("urn:foo:bar").
+			version("0.01").
+			producedBy("Foo Bazzi").
+			on(new Date()).
+			linking(sourceDataProvider).to(targetDataProvider).
+			including(
+				map(nil().with(identifierFor(sourceDataProvider, "urn:1"))).
+					to(
+						target(nil().with(identifierFor(targetDataProvider, "urn:69")))
+					).andTo(
+						target(nil().with(identifierFor(targetDataProvider, "urn:96")))
+					)
+			).including(
+				map(wrap(JAXB2DOMUtils.toElement(GenericTerm.describing("under-exploited"))).with(identifierFor(sourceDataProvider, "urn:2"))).
+					to(
+						target(nil().with(identifierFor(targetDataProvider, "urn:70")))
+					).andTo(
+						target(nil().with(identifierFor(targetDataProvider, "urn:97")))
+					).andTo(
+						target(nil().with(identifierFor(targetDataProvider, "urn:98")))
 					)
 		);
 		
