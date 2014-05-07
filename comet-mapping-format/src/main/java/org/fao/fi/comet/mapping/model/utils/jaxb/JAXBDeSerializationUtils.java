@@ -9,6 +9,8 @@ import java.io.StringReader;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMResult;
 
 import org.fao.fi.comet.mapping.model.MappingData;
@@ -38,6 +40,18 @@ final public class JAXBDeSerializationUtils {
 		}
 	}
 	
+	static public void toResult(MappingData mappingData, Result result) {
+		JAXBDeSerializationUtils.toResult(mappingData, result, MINIMAL_JAXB_CONTEXT);
+	}
+	
+	static public void toResult(MappingData mappingData, Result result, JAXBContext context) {
+		try {
+			context.createMarshaller().marshal(mappingData, result);
+		} catch(Throwable t) {
+			throw new RuntimeException("Unable to marshal " + mappingData + ": " + t.getMessage(), t);
+		}
+	}
+	
 	static public Document toDocument(MappingData mappingData) {
 		return JAXBDeSerializationUtils.toDocument(mappingData, MINIMAL_JAXB_CONTEXT);
 	}
@@ -51,6 +65,18 @@ final public class JAXBDeSerializationUtils {
 			return (Document)domResult.getNode();
 		} catch(Throwable t) {
 			throw new RuntimeException("Unable to marshal " + mappingData + ": " + t.getMessage(), t);
+		}
+	}
+	
+	static public MappingData fromSource(Source source) {
+		return JAXBDeSerializationUtils.fromSource(source, MINIMAL_JAXB_CONTEXT);
+	}
+	
+	static public MappingData fromSource(Source source, JAXBContext context) {
+		try {
+			return context.createUnmarshaller().unmarshal(source, MappingData.class).getValue();  
+		} catch(Throwable t) {
+			throw new RuntimeException("Unable to un marshal " + source + ": " + t.getMessage(), t);
 		}
 	}
 	

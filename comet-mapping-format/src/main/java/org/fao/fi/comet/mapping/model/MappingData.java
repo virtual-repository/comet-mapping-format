@@ -41,14 +41,14 @@ public class MappingData implements Serializable {
 	@XmlAttribute(name="version") private String _version;
 	@XmlAttribute(name="id") private URI _identifier;
 	
-	@XmlElement(name="Description")
+	@XmlElement(name="Description", nillable=true)
 	private String _description;
 	
-	@XmlElement(name="ProcessConfiguration")
+	@XmlElement(name="ProcessConfiguration", nillable=true)
 	private ProcessConfiguration _processConfiguration;
 	
 	@XmlElementWrapper(name="Matchers")
-	@XmlElement(name="MatcherConfiguration")
+	@XmlElement(name="MatcherConfiguration", nillable=true)
 	private Collection<MatcherConfiguration> _matcherConfiguration;
 	
 	@XmlElement(name="Mapping")
