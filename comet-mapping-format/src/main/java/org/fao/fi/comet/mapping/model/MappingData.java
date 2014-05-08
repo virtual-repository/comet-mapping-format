@@ -60,6 +60,14 @@ public class MappingData implements Serializable {
 	public MappingData() {
 		super();
 	}
+	
+	static public MappingData withId(String identifierURI) {
+		return MappingData.withId(URI.create(identifierURI));
+	}
+	
+	static public MappingData withId(URI identifier) {
+		return new MappingData().id(identifier);
+	}
 
 	/**
 	 * @return the 'identifier' value
@@ -199,6 +207,10 @@ public class MappingData implements Serializable {
 		this._producedOn = date;
 		
 		return this;
+	}
+	
+	public MappingData now() {
+		return this.on(new Date());
 	}
 	
 	public MappingData linking(DataProvider source) {

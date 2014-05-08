@@ -116,28 +116,28 @@ public class MappingContribution implements Serializable {
 		return this.scoring(ScoreValue.NO_MATCH, MappingScoreType.NON_PERFORMED);
 	}
 	
-	public MappingContribution authoritative(double score) {
+	public MappingContribution scoringAuthoritative(double score) {
 		return this.scoring(score, MappingScoreType.AUTHORITATIVE);
 	}
 
-	public MappingContribution nonAuthoritative(double score) {
+	public MappingContribution scoringNonAuthoritative(double score) {
 		return this.scoring(score, MappingScoreType.NON_AUTHORITATIVE);
 	}
 
-	public MappingContribution authoritativeFullMatch() {
-		return this.authoritative(ScoreValue.FULL_MATCH);
+	public MappingContribution scoringAuthoritativeFullMatch() {
+		return this.scoringAuthoritative(ScoreValue.FULL_MATCH);
 	}
 	
-	public MappingContribution authoritativeNoMatch() {
-		return this.authoritative(ScoreValue.NO_MATCH);
+	public MappingContribution scoringAuthoritativeNoMatch() {
+		return this.scoringAuthoritative(ScoreValue.NO_MATCH);
 	}
 
-	public MappingContribution fullMatch() {
-		return this.nonAuthoritative(ScoreValue.FULL_MATCH);
+	public MappingContribution scoringFullMatch() {
+		return this.scoringNonAuthoritative(ScoreValue.FULL_MATCH);
 	}
 
-	public MappingContribution noMatch() {
-		return this.nonAuthoritative(ScoreValue.NO_MATCH);
+	public MappingContribution scoringNoMatch() {
+		return this.scoringNonAuthoritative(ScoreValue.NO_MATCH);
 	}
 
 	/* (non-Javadoc)

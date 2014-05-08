@@ -53,7 +53,7 @@ final public class JAXB2DOMUtils {
 		return marshaller;
 	}
 	
-	final static private Element marshalToElement(Marshaller marshaller, Object data) throws JAXBException {
+	final static private Element marshalAsElement(Marshaller marshaller, Object data) throws JAXBException {
 		DOMResult domResult;
 		
 		marshaller.marshal(data, domResult = new DOMResult());
@@ -61,12 +61,12 @@ final public class JAXB2DOMUtils {
 		return ((Document)domResult.getNode()).getDocumentElement();
 	}
 	
-	final static public Element toElement(Object data) {
+	final static public Element asElement(Object data) {
 		if(data == null)
 			return null;
 		
 		try {
-			return marshalToElement(marshallerFor(data.getClass()), data);
+			return marshalAsElement(marshallerFor(data.getClass()), data);
 		} catch (JAXBException JAXBe) {
 			throw new IllegalArgumentException("Can't marshal (" + data.getClass().getName() + ")" + data + " to org.w3c.dom.Element: " + JAXBe.getMessage(), JAXBe);
 		}

@@ -41,7 +41,7 @@ public class MappingElementDSL {
 	}
 	
 	final static public MappingElement wrap(MappingElementIdentifier elementIdentifier, Object data) {
-		return new MappingElement().with(elementIdentifier).wrapping(JAXB2DOMUtils.toElement(data));
+		return new MappingElement().with(elementIdentifier).wrapping(JAXB2DOMUtils.asElement(data));
 	}
 	
 	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Object data) {
@@ -49,11 +49,11 @@ public class MappingElementDSL {
 	}
 	
 	final static public MappingElement wrap(URI providerId, URI elementId, Object data) {
-		return new MappingElement().with(providerId, elementId).wrapping(JAXB2DOMUtils.toElement(data));
+		return new MappingElement().with(providerId, elementId).wrapping(JAXB2DOMUtils.asElement(data));
 	}
 
 	final static public MappingElement wrap(Object data) {
-		return new MappingElement().wrapping(JAXB2DOMUtils.toElement(data));
+		return new MappingElement().wrapping(JAXB2DOMUtils.asElement(data));
 	}
 	
 	final static public MappingElement nil() {
