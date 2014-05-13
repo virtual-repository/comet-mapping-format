@@ -50,7 +50,7 @@ public class DataProvider implements Serializable {
 	@XmlAttribute(name="providerType") private URI _providerType;
 	@XmlAttribute(name="providerId") private URI _providerId;
 	
-	@XmlElement(name="Description", nillable=true)
+	@XmlElement(name="Description")
 	private String _description;
 
 	/**
