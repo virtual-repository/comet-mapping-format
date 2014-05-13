@@ -99,12 +99,12 @@ public class MappingElement implements Serializable {
 		this._data = data;
 	}
 	
-	public MappingElement with(URI providerId, URI elementId) {
-		return this.with(new MappingElementIdentifier(providerId, elementId));
+	public MappingElement with(URI elementId) {
+		return this.with(new MappingElementIdentifier(elementId));
 	}
 	
-	public MappingElement with(String providerIdURI, String elementIdURI) {
-		return this.with(URI.create(providerIdURI), URI.create(elementIdURI));
+	public MappingElement with(String elementIdURI) {
+		return this.with(URI.create(elementIdURI));
 	}
 	
 	 public MappingElement with(MappingElementIdentifier elementIdentifier) {

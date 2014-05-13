@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlType;
 public class MappingElementIdentifier implements Serializable {
 	private static final long serialVersionUID = 3461143166759375588L;
 
-	@XmlAttribute(name="providerId") private URI _providerIdentifier;
 	@XmlAttribute(name="elementId") private URI _elementId;
 		
 	/**
@@ -43,39 +42,20 @@ public class MappingElementIdentifier implements Serializable {
 	/**
 	 * Class constructor
 	 *
-	 * @param providerIdentifier
 	 * @param elementIdentifier
 	 */
-	public MappingElementIdentifier(URI providerIdentifier, URI elementIdentifier) {
+	public MappingElementIdentifier(URI elementIdentifier) {
 		super();
-		this._providerIdentifier = providerIdentifier;
 		this._elementId = elementIdentifier;
 	}
 	
 	/**
 	 * Class constructor
 	 *
-	 * @param providerIdURI
-	 * @param dataSourceIdURI
-	 * @param version
 	 * @param elementIdURI
 	 */
-	public MappingElementIdentifier(String providerIdURI, String elementIdURI) {
-		this(URI.create(providerIdURI), URI.create(elementIdURI));
-	}
-	
-	/**
-	 * @return the 'providerId' value
-	 */
-	public final URI getProviderId() {
-		return this._providerIdentifier;
-	}
-
-	/**
-	 * @param providerId the 'providerId' value to set
-	 */
-	public final void setProviderId(URI providerId) {
-		this._providerIdentifier = providerId;
+	public MappingElementIdentifier(String elementIdURI) {
+		this(URI.create(elementIdURI));
 	}
 
 	/**
@@ -100,7 +80,6 @@ public class MappingElementIdentifier implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((this._elementId == null) ? 0 : this._elementId.hashCode());
-		result = prime * result + ((this._providerIdentifier == null) ? 0 : this._providerIdentifier.hashCode());
 		return result;
 	}
 
@@ -120,11 +99,6 @@ public class MappingElementIdentifier implements Serializable {
 			if (other._elementId != null)
 				return false;
 		} else if (!this._elementId.equals(other._elementId))
-			return false;
-		if (this._providerIdentifier == null) {
-			if (other._providerIdentifier != null)
-				return false;
-		} else if (!this._providerIdentifier.equals(other._providerIdentifier))
 			return false;
 		return true;
 	}

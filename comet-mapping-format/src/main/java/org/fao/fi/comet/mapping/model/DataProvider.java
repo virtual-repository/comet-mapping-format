@@ -47,7 +47,6 @@ public class DataProvider implements Serializable {
 	@XmlAttribute(name="providedType", required=false) private URI _providedType;
 	@XmlAttribute(name="version", required=false) private String _version;
 	@XmlAttribute(name="dataSourceId") private URI _dataSourceId;
-	@XmlAttribute(name="providerType") private URI _providerType;
 	@XmlAttribute(name="providerId") private URI _providerId;
 	
 	@XmlElement(name="Description")
@@ -64,16 +63,14 @@ public class DataProvider implements Serializable {
 	 * Class constructor
 	 *
 	 * @param providerId
-	 * @param providerType
 	 * @param dataSourceId
 	 * @param version
 	 * @param providedType
 	 * @param description
 	 */
-	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, URI providedType, String description) {
+	public DataProvider(URI providerId, URI dataSourceId, String version, URI providedType, String description) {
 		super();
 		this._providerId = providerId;
-		this._providerType = providerType;
 		this._dataSourceId = dataSourceId;
 		this._version = version;
 		this._providedType = providedType;
@@ -84,40 +81,37 @@ public class DataProvider implements Serializable {
 	 * Class constructor
 	 *
 	 * @param providerId
-	 * @param providerType
 	 * @param dataSourceId
 	 * @param version
 	 * @param providedType
 	 */
-	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, URI providedType) {
-		this(providerId, providerType, dataSourceId, version, providedType, null);
+	public DataProvider(URI providerId, URI dataSourceId, String version, URI providedType) {
+		this(providerId, dataSourceId, version, providedType, null);
 	}
 
 	/**
 	 * Class constructor
 	 *
 	 * @param providerIdURI
-	 * @param providerTypeURI
 	 * @param dataSourceIdURI
 	 * @param version
 	 * @param providedTypeURI
 	 * @param description
 	 */
-	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedTypeURI, String description) {
-		this(URI.create(providerIdURI), URI.create(providerTypeURI), URI.create(dataSourceIdURI), version, URI.create(providedTypeURI), description);
+	public DataProvider(String providerIdURI, String dataSourceIdURI, String version, String providedTypeURI, String description) {
+		this(URI.create(providerIdURI), URI.create(dataSourceIdURI), version, URI.create(providedTypeURI), description);
 	}
 
 	/**
 	 * Class constructor
 	 *
 	 * @param providerIdURI
-	 * @param providerTypeURI
 	 * @param dataSourceIdURI
 	 * @param version
 	 * @param providedTypeURI
 	 */
-	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedTypeURI) {
-		this(providerIdURI, providerTypeURI, dataSourceIdURI, version, providedTypeURI, null);
+	public DataProvider(String providerIdURI, String dataSourceIdURI, String version, String providedTypeURI) {
+		this(providerIdURI, dataSourceIdURI, version, providedTypeURI, null);
 	}
 
 	/**
@@ -132,20 +126,6 @@ public class DataProvider implements Serializable {
 	 */
 	public void setProviderId(URI providerId) {
 		this._providerId = providerId;
-	}
-
-	/**
-	 * @return the 'providerType' value
-	 */
-	public URI getProviderType() {
-		return this._providerType;
-	}
-
-	/**
-	 * @param providerType the 'providerType' value to set
-	 */
-	public void setProviderType(URI providerType) {
-		this._providerType = providerType;
 	}
 
 	/**
@@ -203,6 +183,40 @@ public class DataProvider implements Serializable {
 	public void setDescription(String description) {
 		this._description = description;
 	}
+	
+	public DataProvider of(URI providedType) {
+		this._providedType = providedType;
+		
+		return this;
+	}
+	
+	public DataProvider of(String providedTypeURI) {
+		return this.of(URI.create(providedTypeURI));
+	}
+	
+	public DataProvider in(URI dataSourceId) {
+		this._dataSourceId = dataSourceId;
+		
+		return this;
+	}
+	
+	public DataProvider named(URI dataSourceId, String version) {
+		return this.in(dataSourceId).withVersion(version);
+	}
+	
+	public DataProvider named(String dataSourceIdURI) {
+		return this.in(URI.create(dataSourceIdURI));
+	}
+	
+	public DataProvider named(String dataSourceIdURI, String version) {
+		return this.named(URI.create(dataSourceIdURI), version);
+	}
+	
+	public DataProvider withVersion(String version) {
+		this._version = version;
+		
+		return this;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -213,9 +227,8 @@ public class DataProvider implements Serializable {
 		int result = 1;
 		result = prime * result + ((this._dataSourceId == null) ? 0 : this._dataSourceId.hashCode());
 		result = prime * result + ((this._description == null) ? 0 : this._description.hashCode());
-		result = prime * result + ((this._providerId == null) ? 0 : this._providerId.hashCode());
 		result = prime * result + ((this._providedType == null) ? 0 : this._providedType.hashCode());
-		result = prime * result + ((this._providerType == null) ? 0 : this._providerType.hashCode());
+		result = prime * result + ((this._providerId == null) ? 0 : this._providerId.hashCode());
 		result = prime * result + ((this._version == null) ? 0 : this._version.hashCode());
 		return result;
 	}
@@ -242,20 +255,15 @@ public class DataProvider implements Serializable {
 				return false;
 		} else if (!this._description.equals(other._description))
 			return false;
-		if (this._providerId == null) {
-			if (other._providerId != null)
-				return false;
-		} else if (!this._providerId.equals(other._providerId))
-			return false;
 		if (this._providedType == null) {
 			if (other._providedType != null)
 				return false;
 		} else if (!this._providedType.equals(other._providedType))
 			return false;
-		if (this._providerType == null) {
-			if (other._providerType != null)
+		if (this._providerId == null) {
+			if (other._providerId != null)
 				return false;
-		} else if (!this._providerType.equals(other._providerType))
+		} else if (!this._providerId.equals(other._providerId))
 			return false;
 		if (this._version == null) {
 			if (other._version != null)

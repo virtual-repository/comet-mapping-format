@@ -21,27 +21,37 @@ import org.fao.fi.comet.mapping.model.DataProvider;
  * @since 17 Apr 2014
  */
 public class DataProviderDSL {
-	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI) {
-		return DataProviderDSL.provider(identifierURI, typeURI, dataSourceIdentifierURI, null);
+	final static public DataProvider provider(URI identifier) {
+		DataProvider provider = new DataProvider();
+		provider.setProviderId(identifier);
+		return provider;
 	}
 	
-	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version) {
-		return DataProviderDSL.provider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, (URI)null);
+	final static public DataProvider provider(String identifierURI) {
+		return provider(URI.create(identifierURI));
 	}
 	
-	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version, String providedTypeURI) {
-		return new DataProvider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, URI.create(providedTypeURI));
+	final static public DataProvider provider(String identifierURI, String dataSourceIdentifierURI) {
+		return DataProviderDSL.provider(identifierURI, dataSourceIdentifierURI, null);
 	}
 	
-	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version) {
-		return new DataProvider(identifier, type, dataSourceIdentifier, version, null);
+	final static public DataProvider provider(String identifierURI, String dataSourceIdentifierURI, String version) {
+		return DataProviderDSL.provider(URI.create(identifierURI), (URI)null, URI.create(dataSourceIdentifierURI), version);
 	}
 	
-	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version, URI providedType) {
-		return new DataProvider(identifier, type, dataSourceIdentifier, version, providedType);
+	final static public DataProvider provider(String identifierURI, String providedTypeURI, String dataSourceIdentifierURI, String version) {
+		return new DataProvider(URI.create(identifierURI), URI.create(dataSourceIdentifierURI), version, URI.create(providedTypeURI));
 	}
 	
-	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, URI providedType) {
-		return new DataProvider(identifier, type, dataSourceIdentifier, null, providedType);
+	final static public DataProvider provider(URI identifier, URI dataSourceIdentifier, String version) {
+		return new DataProvider(identifier, dataSourceIdentifier, version, null);
+	}
+	
+	final static public DataProvider provider(URI identifier, URI providedType, URI dataSourceIdentifier, String version) {
+		return new DataProvider(identifier, dataSourceIdentifier, version, providedType);
+	}
+	
+	final static public DataProvider provider(URI identifier, URI providedType, URI dataSourceIdentifier) {
+		return new DataProvider(identifier, dataSourceIdentifier, null, providedType);
 	}
 }

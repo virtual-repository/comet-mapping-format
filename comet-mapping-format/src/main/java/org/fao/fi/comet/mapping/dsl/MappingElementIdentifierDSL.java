@@ -5,7 +5,6 @@ package org.fao.fi.comet.mapping.dsl;
 
 import java.net.URI;
 
-import org.fao.fi.comet.mapping.model.DataProvider;
 import org.fao.fi.comet.mapping.model.MappingElementIdentifier;
 
 /**
@@ -23,22 +22,14 @@ import org.fao.fi.comet.mapping.model.MappingElementIdentifier;
  */
 public class MappingElementIdentifierDSL {
 	final static public MappingElementIdentifier identifier(MappingElementIdentifier elementId) {
-		return new MappingElementIdentifier(elementId.getProviderId(), elementId.getElementId());
+		return new MappingElementIdentifier(elementId.getElementId());
 	}
 
-	final static public MappingElementIdentifier identifier(URI providerId, URI elementId) {
-		return new MappingElementIdentifier(providerId, elementId);
+	final static public MappingElementIdentifier identifierFor(URI elementId) {
+		return new MappingElementIdentifier(elementId);
 	}
 	
-	final static public MappingElementIdentifier identifier(String providerIdURI, String elementIdURI) {
-		return MappingElementIdentifierDSL.identifier(URI.create(providerIdURI), URI.create(elementIdURI));
-	}
-	
-	final static public MappingElementIdentifier identifierFor(DataProvider provider, URI elementId) {
-		return new MappingElementIdentifier(provider.getProviderId(), elementId);
-	}
-	
-	final static public MappingElementIdentifier identifierFor(DataProvider provider, String elementIdURI) {
-		return MappingElementIdentifierDSL.identifier(provider.getProviderId(), URI.create(elementIdURI));
+	final static public MappingElementIdentifier identifierFor(String elementIdURI) {
+		return MappingElementIdentifierDSL.identifierFor(URI.create(elementIdURI));
 	}
 }

@@ -28,12 +28,12 @@ public class MappingElementDSL {
 		return new MappingElement().with(elementIdentifier).wrapping(data);
 	}
 
-	final static public MappingElement wrap(URI providerId, URI elementId, Element data) {
-		return new MappingElement().with(providerId, elementId).wrapping(data);
+	final static public MappingElement wrap(URI elementId, Element data) {
+		return new MappingElement().with(elementId).wrapping(data);
 	}
 	
-	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Element data) {
-		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
+	final static public MappingElement wrap(String elementIdURI, Element data) {
+		return MappingElementDSL.wrap(URI.create(elementIdURI), data);
 	}
 
 	final static public MappingElement wrap(Element data) {
@@ -44,12 +44,12 @@ public class MappingElementDSL {
 		return new MappingElement().with(elementIdentifier).wrapping(JAXB2DOMUtils.asElement(data));
 	}
 	
-	final static public MappingElement wrap(String providerIdURI, String elementIdURI, Object data) {
-		return MappingElementDSL.wrap(URI.create(providerIdURI), URI.create(elementIdURI), data);
+	final static public MappingElement wrap(String elementIdURI, Object data) {
+		return MappingElementDSL.wrap(URI.create(elementIdURI), data);
 	}
 	
-	final static public MappingElement wrap(URI providerId, URI elementId, Object data) {
-		return new MappingElement().with(providerId, elementId).wrapping(JAXB2DOMUtils.asElement(data));
+	final static public MappingElement wrap(URI elementId, Object data) {
+		return new MappingElement().with(elementId).wrapping(JAXB2DOMUtils.asElement(data));
 	}
 
 	final static public MappingElement wrap(Object data) {
@@ -60,11 +60,11 @@ public class MappingElementDSL {
 		return new MappingElement().wrapping(null);
 	}
 	
-	final static public MappingElement nil(URI providerId, URI elementId) {
-		return new MappingElement().with(providerId, elementId).wrapping(null);
+	final static public MappingElement nil(URI elementId) {
+		return new MappingElement().with(elementId).wrapping(null);
 	}
 	
-	final static public MappingElement nil(String providerIdURI, String elementIdURI) {
-		return new MappingElement().with(URI.create(providerIdURI), URI.create(elementIdURI)).wrapping(null);
+	final static public MappingElement nil(String elementIdURI) {
+		return new MappingElement().with(URI.create(elementIdURI)).wrapping(null);
 	}
 }
