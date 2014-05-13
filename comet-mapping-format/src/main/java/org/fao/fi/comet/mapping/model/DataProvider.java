@@ -194,18 +194,18 @@ public class DataProvider implements Serializable {
 		return this.of(URI.create(providedTypeURI));
 	}
 	
-	public DataProvider in(URI dataSourceId) {
+	public DataProvider named(URI dataSourceId) {
 		this._dataSourceId = dataSourceId;
 		
 		return this;
 	}
 	
 	public DataProvider named(URI dataSourceId, String version) {
-		return this.in(dataSourceId).withVersion(version);
+		return this.named(dataSourceId).withVersion(version);
 	}
 	
 	public DataProvider named(String dataSourceIdURI) {
-		return this.in(URI.create(dataSourceIdURI));
+		return this.named(URI.create(dataSourceIdURI));
 	}
 	
 	public DataProvider named(String dataSourceIdURI, String version) {
