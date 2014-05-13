@@ -21,19 +21,27 @@ import org.fao.fi.comet.mapping.model.DataProvider;
  * @since 17 Apr 2014
  */
 public class DataProviderDSL {
-	final static public DataProvider provider(String identifierURI) {
-		return DataProviderDSL.provider(URI.create(identifierURI));
+	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI) {
+		return DataProviderDSL.provider(identifierURI, dataSourceIdentifierURI, null);
 	}
 	
-	final static public DataProvider provider(URI identifier) {
-		return new DataProvider(identifier, null);
+	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version) {
+		return DataProviderDSL.provider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, (URI)null);
 	}
 	
-	final static public DataProvider provider(String identifierURI, String providedType) {
-		return new DataProvider(URI.create(identifierURI), providedType);
+	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version, String providedType) {
+		return new DataProvider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, providedType);
 	}
 	
-	final static public DataProvider provider(URI identifier, String providedType) {
-		return new DataProvider(identifier, providedType);
+	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version) {
+		return new DataProvider(identifier, type, dataSourceIdentifier, version, null);
+	}
+	
+	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version, URI providedType) {
+		return new DataProvider(identifier, type, dataSourceIdentifier, version, providedType == null ? null : providedType.toString());
+	}
+	
+	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, URI providedType) {
+		return new DataProvider(identifier, type, dataSourceIdentifier, null, providedType == null ? null : providedType.toString());
 	}
 }

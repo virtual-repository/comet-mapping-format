@@ -16,6 +16,7 @@ import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationDSL.optional;
 import static org.fao.fi.comet.mapping.dsl.MatcherConfigurationPropertyDSL.configurationProperty;
 import static org.fao.fi.comet.mapping.model.utils.jaxb.JAXB2DOMUtils.asElement;
 
+import org.fao.fi.comet.mapping.dsl.DataProviderDSL;
 import org.fao.fi.comet.mapping.model.DataProvider;
 import org.fao.fi.comet.mapping.model.MappingData;
 import org.fao.fi.comet.mapping.model.test.support.GenericTerm;
@@ -41,8 +42,8 @@ public class GenericTermMappingDataMock extends MappingData {
 	}
 	
 	static final public MappingData newInstance() throws Throwable {
-		DataProvider sourceDataProvider = new DataProvider("urn:fooResourceStatus", GenericTerm.class.getName());
-		DataProvider targetDataProvider = new DataProvider("urn:barResourceStatus", GenericTerm.class.getName());
+		DataProvider sourceDataProvider = DataProviderDSL.provider("urn:fooResourceStatusProvider", "http://cotrix.org", "urn:fooResourceStatus", "1.0");
+		DataProvider targetDataProvider = DataProviderDSL.provider("urn:barResourceStatusProvider", "http://cotrix.org", "urn:barResourceStatus", "1.1");
 		
 		MappingData mappingData = MappingData.
 			withId("urn:foo:bar").
@@ -121,8 +122,8 @@ public class GenericTermMappingDataMock extends MappingData {
 	}
 	
 	static final public MappingData newInstanceWithNils() throws Throwable {
-		DataProvider sourceDataProvider = new DataProvider("urn:fooResourceStatus", GenericTerm.class.getName());
-		DataProvider targetDataProvider = new DataProvider("urn:barResourceStatus", GenericTerm.class.getName());
+		DataProvider sourceDataProvider = DataProviderDSL.provider("urn:fooResourceStatusProvider", "http://cotrix.org", "urn:fooResourceStatus", "1.0");
+		DataProvider targetDataProvider = DataProviderDSL.provider("urn:barResourceStatusProvider", "http://cotrix.org", "urn:barResourceStatus", "1.1");
 		
 		MappingData mappingData = MappingData.
 			withId("urn:foo:bar").

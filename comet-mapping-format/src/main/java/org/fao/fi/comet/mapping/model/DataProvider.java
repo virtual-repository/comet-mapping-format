@@ -5,7 +5,6 @@ package org.fao.fi.comet.mapping.model;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,6 +25,19 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 17 Apr 2014
  */
+/**
+ * Place your class / interface description here.
+ *
+ * History:
+ *
+ * ------------- --------------- -----------------------
+ * Date			 Author			 Comment
+ * ------------- --------------- -----------------------
+ * 13 May 2014   Fiorellato     Creation.
+ *
+ * @version 1.0
+ * @since 13 May 2014
+ */
 @XmlType(name="DataProvider")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DataProvider implements Serializable {
@@ -33,10 +45,12 @@ public class DataProvider implements Serializable {
 	private static final long serialVersionUID = 5860563937581245902L;
 
 	@XmlAttribute(name="providedType", required=false) private String _providedType;
-	@XmlAttribute(name="type", required=false) private String _type;
-	@XmlAttribute(name="identifier") private URI _identifier;
+	@XmlAttribute(name="version", required=false) private String _version;
+	@XmlAttribute(name="dataSourceId") private URI _dataSourceId;
+	@XmlAttribute(name="providerType") private URI _providerType;
+	@XmlAttribute(name="providerId") private URI _providerId;
 	
-	@XmlElement(name="Description")
+	@XmlElement(name="Description", nillable=true)
 	private String _description;
 
 	/**
@@ -49,85 +63,117 @@ public class DataProvider implements Serializable {
 	/**
 	 * Class constructor
 	 *
-	 * @param identifier
-	 * @param type
+	 * @param providerId
+	 * @param providerType
+	 * @param dataSourceId
+	 * @param version
+	 * @param providedType
 	 * @param description
 	 */
-	public DataProvider(URI identifier, String type, String providedType, String description) {
+	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, String providedType, String description) {
 		super();
-		this._identifier = identifier;
-		this._type = type;
+		this._providerId = providerId;
+		this._providerType = providerType;
+		this._dataSourceId = dataSourceId;
+		this._version = version;
 		this._providedType = providedType;
 		this._description = description;
 	}
-	
+
 	/**
 	 * Class constructor
 	 *
-	 * @param identifier
-	 * @param type
+	 * @param providerId
+	 * @param providerType
+	 * @param dataSourceId
+	 * @param version
+	 * @param providedType
+	 */
+	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, String providedType) {
+		this(providerId, providerType, dataSourceId, version, providedType, null);
+	}
+
+	/**
+	 * Class constructor
+	 *
+	 * @param providerIdURI
+	 * @param providerTypeURI
+	 * @param dataSourceIdURI
+	 * @param version
+	 * @param providedType
 	 * @param description
 	 */
-	public DataProvider(String identifier, String type, String providedType, String description) {
-		super();
-		
-		this._type = type;
-		this._providedType = providedType;
-		this._description = description;
-
-		try {
-			this._identifier = new URI(identifier);
-		} catch(URISyntaxException USe) {
-			throw new IllegalArgumentException("Bad format for URI " + identifier + ": " + USe.getMessage(), USe);
-		}
+	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedType, String description) {
+		this(URI.create(providerIdURI), URI.create(providerTypeURI), URI.create(dataSourceIdURI), version, providedType, description);
 	}
-	
+
 	/**
 	 * Class constructor
 	 *
-	 * @param identifier
-	 * @param type
+	 * @param providerIdURI
+	 * @param providerTypeURI
+	 * @param dataSourceIdURI
+	 * @param version
+	 * @param providedType
 	 */
-	public DataProvider(URI identifier, String providedType) {
-		this(identifier, providedType + "Provider", providedType, null);
-	}
-	
-	/**
-	 * Class constructor
-	 *
-	 * @param identifier
-	 * @param type
-	 */
-	public DataProvider(String identifier, String providedType) {
-		this(identifier, providedType + "Provider", providedType, null);
+	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedType) {
+		this(providerIdURI, providerTypeURI, dataSourceIdURI, version, providedType, null);
 	}
 
 	/**
-	 * @return the 'identifier' value
+	 * @return the 'providerId' value
 	 */
-	public URI getIdentifier() {
-		return this._identifier;
+	public URI getProviderId() {
+		return this._providerId;
 	}
 
 	/**
-	 * @param identifier the 'identifier' value to set
+	 * @param providerId the 'providerId' value to set
 	 */
-	public void setIdentifier(URI identifier) {
-		this._identifier = identifier;
+	public void setProviderId(URI providerId) {
+		this._providerId = providerId;
 	}
 
 	/**
-	 * @return the 'type' value
+	 * @return the 'providerType' value
 	 */
-	public String getType() {
-		return this._type;
+	public URI getProviderType() {
+		return this._providerType;
 	}
 
 	/**
-	 * @param type the 'type' value to set
+	 * @param providerType the 'providerType' value to set
 	 */
-	public void setType(String type) {
-		this._type = type;
+	public void setProviderType(URI providerType) {
+		this._providerType = providerType;
+	}
+
+	/**
+	 * @return the 'dataSourceId' value
+	 */
+	public URI getDataSourceId() {
+		return this._dataSourceId;
+	}
+
+	/**
+	 * @param dataSourceId the 'dataSourceId' value to set
+	 */
+	public void setDataSourceId(URI dataSourceId) {
+		this._dataSourceId = dataSourceId;
+	}
+
+	/**
+	 * @return the 'version' value
+	 */
+	public String getVersion() {
+		return this._version;
+	}
+
+	/**
+	 * @param version the 'version' value to set
+	 */
+	public void setVersion(String version) {
+		this._version = version;
 	}
 
 	/**
@@ -165,10 +211,12 @@ public class DataProvider implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((this._dataSourceId == null) ? 0 : this._dataSourceId.hashCode());
 		result = prime * result + ((this._description == null) ? 0 : this._description.hashCode());
-		result = prime * result + ((this._identifier == null) ? 0 : this._identifier.hashCode());
+		result = prime * result + ((this._providerId == null) ? 0 : this._providerId.hashCode());
 		result = prime * result + ((this._providedType == null) ? 0 : this._providedType.hashCode());
-		result = prime * result + ((this._type == null) ? 0 : this._type.hashCode());
+		result = prime * result + ((this._providerType == null) ? 0 : this._providerType.hashCode());
+		result = prime * result + ((this._version == null) ? 0 : this._version.hashCode());
 		return result;
 	}
 
@@ -184,25 +232,35 @@ public class DataProvider implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DataProvider other = (DataProvider) obj;
+		if (this._dataSourceId == null) {
+			if (other._dataSourceId != null)
+				return false;
+		} else if (!this._dataSourceId.equals(other._dataSourceId))
+			return false;
 		if (this._description == null) {
 			if (other._description != null)
 				return false;
 		} else if (!this._description.equals(other._description))
 			return false;
-		if (this._identifier == null) {
-			if (other._identifier != null)
+		if (this._providerId == null) {
+			if (other._providerId != null)
 				return false;
-		} else if (!this._identifier.equals(other._identifier))
+		} else if (!this._providerId.equals(other._providerId))
 			return false;
 		if (this._providedType == null) {
 			if (other._providedType != null)
 				return false;
 		} else if (!this._providedType.equals(other._providedType))
 			return false;
-		if (this._type == null) {
-			if (other._type != null)
+		if (this._providerType == null) {
+			if (other._providerType != null)
 				return false;
-		} else if (!this._type.equals(other._type))
+		} else if (!this._providerType.equals(other._providerType))
+			return false;
+		if (this._version == null) {
+			if (other._version != null)
+				return false;
+		} else if (!this._version.equals(other._version))
 			return false;
 		return true;
 	}
