@@ -29,8 +29,8 @@ public class DataProviderDSL {
 		return DataProviderDSL.provider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, (URI)null);
 	}
 	
-	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version, String providedType) {
-		return new DataProvider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, providedType);
+	final static public DataProvider provider(String identifierURI, String typeURI, String dataSourceIdentifierURI, String version, String providedTypeURI) {
+		return new DataProvider(URI.create(identifierURI), URI.create(typeURI), URI.create(dataSourceIdentifierURI), version, URI.create(providedTypeURI));
 	}
 	
 	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version) {
@@ -38,10 +38,10 @@ public class DataProviderDSL {
 	}
 	
 	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, String version, URI providedType) {
-		return new DataProvider(identifier, type, dataSourceIdentifier, version, providedType == null ? null : providedType.toString());
+		return new DataProvider(identifier, type, dataSourceIdentifier, version, providedType);
 	}
 	
 	final static public DataProvider provider(URI identifier, URI type, URI dataSourceIdentifier, URI providedType) {
-		return new DataProvider(identifier, type, dataSourceIdentifier, null, providedType == null ? null : providedType.toString());
+		return new DataProvider(identifier, type, dataSourceIdentifier, null, providedType);
 	}
 }

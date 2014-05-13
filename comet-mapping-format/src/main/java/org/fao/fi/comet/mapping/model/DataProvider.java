@@ -44,7 +44,7 @@ public class DataProvider implements Serializable {
 	/** Field serialVersionUID */
 	private static final long serialVersionUID = 5860563937581245902L;
 
-	@XmlAttribute(name="providedType", required=false) private String _providedType;
+	@XmlAttribute(name="providedType", required=false) private URI _providedType;
 	@XmlAttribute(name="version", required=false) private String _version;
 	@XmlAttribute(name="dataSourceId") private URI _dataSourceId;
 	@XmlAttribute(name="providerType") private URI _providerType;
@@ -70,7 +70,7 @@ public class DataProvider implements Serializable {
 	 * @param providedType
 	 * @param description
 	 */
-	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, String providedType, String description) {
+	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, URI providedType, String description) {
 		super();
 		this._providerId = providerId;
 		this._providerType = providerType;
@@ -89,7 +89,7 @@ public class DataProvider implements Serializable {
 	 * @param version
 	 * @param providedType
 	 */
-	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, String providedType) {
+	public DataProvider(URI providerId, URI providerType, URI dataSourceId, String version, URI providedType) {
 		this(providerId, providerType, dataSourceId, version, providedType, null);
 	}
 
@@ -100,11 +100,11 @@ public class DataProvider implements Serializable {
 	 * @param providerTypeURI
 	 * @param dataSourceIdURI
 	 * @param version
-	 * @param providedType
+	 * @param providedTypeURI
 	 * @param description
 	 */
-	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedType, String description) {
-		this(URI.create(providerIdURI), URI.create(providerTypeURI), URI.create(dataSourceIdURI), version, providedType, description);
+	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedTypeURI, String description) {
+		this(URI.create(providerIdURI), URI.create(providerTypeURI), URI.create(dataSourceIdURI), version, URI.create(providedTypeURI), description);
 	}
 
 	/**
@@ -114,10 +114,10 @@ public class DataProvider implements Serializable {
 	 * @param providerTypeURI
 	 * @param dataSourceIdURI
 	 * @param version
-	 * @param providedType
+	 * @param providedTypeURI
 	 */
-	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedType) {
-		this(providerIdURI, providerTypeURI, dataSourceIdURI, version, providedType, null);
+	public DataProvider(String providerIdURI, String providerTypeURI, String dataSourceIdURI, String version, String providedTypeURI) {
+		this(providerIdURI, providerTypeURI, dataSourceIdURI, version, providedTypeURI, null);
 	}
 
 	/**
@@ -179,14 +179,14 @@ public class DataProvider implements Serializable {
 	/**
 	 * @return the 'providedType' value
 	 */
-	public String getProvidedType() {
+	public URI getProvidedType() {
 		return this._providedType;
 	}
 
 	/**
 	 * @param providedType the 'providedType' value to set
 	 */
-	public void setProvidedType(String providedType) {
+	public void setProvidedType(URI providedType) {
 		this._providedType = providedType;
 	}
 
