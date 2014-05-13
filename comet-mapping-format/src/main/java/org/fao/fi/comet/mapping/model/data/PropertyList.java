@@ -9,7 +9,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Place your class / interface description here.
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  * @version 1.0
  * @since 13 May 2014
  */
-@XmlType(name="PropertyList")
+@XmlRootElement(name="PropertyList")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PropertyList implements Serializable {
 	/** Field serialVersionUID */
