@@ -4,8 +4,7 @@
 	
 	<groupId>org.fao.fi.comet.mapping</groupId>
 	<artifactId>comet-mapping-format</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	
+	<version>0.0.1-SNAPSHOT</version>	
 	
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
