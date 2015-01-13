@@ -298,6 +298,20 @@ public class MappingData implements Serializable {
 		
 		return false;
 	}
+	
+	public MappingConfiguration getConfiguration() {
+		return 
+			new MappingConfiguration(
+					this._identifier.toString(),
+					this._version,
+					this._description,
+					this._producedBy,
+					this._producedOn,
+					this._processConfiguration,
+					this._matcherConfiguration
+			);
+					
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
